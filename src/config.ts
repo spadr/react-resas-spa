@@ -28,7 +28,7 @@ const Config: _Config = {
   endPointPopulationParameter2:
     process.env.REACT_APP_END_POINT_POPULATION_PARAMETER2 || "cityCode",
   endPointPopulationParameter1Value:
-    process.env.REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE || "NotDefined",
+    process.env.REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE || "13", //Tokyo:13
   endPointPopulationParameter2Value:
     process.env.REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE || "-",
   plotTitle: process.env.REACT_APP_PLOT_TITLE || "人口構成",

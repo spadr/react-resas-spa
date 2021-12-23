@@ -2,8 +2,15 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Config from "./config";
+import { getPrefecture, getPopulation } from "./apiFetch";
 
 function App() {
+  console.log("Prefecture");
+  console.log(getPrefecture());
+  console.log("Population");
+  console.log(getPopulation());
+  console.log("apiKey");
+  console.log(Config.apiKey);
   return (
     <div className="App">
       <header className="App-header">
@@ -19,8 +26,6 @@ function App() {
         >
           Learn React
         </a>
-        <p>NODE_ENV : {Config.nodeEnv}</p>
-        <p>API_KEY : {Config.apiKey}</p>
       </header>
     </div>
   );
