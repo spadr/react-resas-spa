@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Config from "./config";
 
 type _Prefecture = {
@@ -51,7 +52,7 @@ async function getPopulation(
 
   if (res.ok) {
     const data = (await res.json()) as _Population;
-    return data;
+    return await data;
   } else {
     console.error("Could not GET data");
   }
@@ -64,7 +65,7 @@ async function getPrefecture() {
 
   if (res.ok) {
     const data = (await res.json()) as _Prefecture;
-    return data;
+    return await data;
   } else {
     console.error("Could not GET data");
   }
