@@ -27,11 +27,11 @@ interface _Population {
           ];
         }
       ];
-    }
+    },
   ];
 }
 
-interface _State {
+interface _Series {
   series: [
     {
       show: boolean;
@@ -43,7 +43,7 @@ interface _State {
           y: number;
         }
       ];
-    }
+    },
   ];
   xaxis: {
     type: string;
@@ -151,8 +151,10 @@ class App extends Component {
       series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
       this.setState({
         series: series_copy,
+        boundaryYear: data.result.boundaryYear,
       });
       console.log(series_copy);
+      console.log(data.result.boundaryYear);
     } else {
       console.error("Could not GET Population data");
     }
