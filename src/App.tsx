@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Chart from "react-apexcharts";
 import Config from "./config";
 
 interface _Prefecture {
@@ -27,7 +28,7 @@ interface _Population {
           ];
         }
       ];
-    },
+    }
   ];
 }
 
@@ -43,7 +44,7 @@ interface _Series {
           y: number;
         }
       ];
-    },
+    }
   ];
   xaxis: {
     type: string;
@@ -94,7 +95,6 @@ class App extends Component {
   }
 
   Checkbox(props) {
-    console.log(props);
     return (
       <div key={props.code} style={{ margin: "5px", display: "inline-block" }}>
         <input
@@ -174,13 +174,27 @@ class App extends Component {
 
   render() {
     const plot_data = this.state.series;
-    console.log("----------------------");
+    const series_copy = this.state.series.slice();
+    const show_series = [];
+    for (let i = 0; i < series_copy.length; i++) {
+      if (series_copy[i].show) {
+        show_series.push(series_copy[i]);
+      }
+    }
+    console.log(show_series);
     return (
       <div>
-        <h1>Title</h1>
-        <h2>都道府県</h2>
+        <h1>{Config.pageTitle}</h1>
+        <h2>{Config.checkBoxTitle}</h2>
         {Object.keys(plot_data).map((i) => this.Checkbox(plot_data[i]))}
         <h2>{Config.plotTitle}</h2>
+        <Chart
+          options={this.state.options}
+          series={show_series}
+          type="line"
+          width="100%"
+          height="100%"
+        />
       </div>
     );
   }
