@@ -1,13 +1,14 @@
 type _Config = {
   apiKey: string;
   nodeEnv: string;
-  pageTitle: string;
   endPointPrefecture: string;
   endPointPopulation: string;
   endPointPopulationParameter1: string;
   endPointPopulationParameter2: string;
   endPointPopulationParameter1Value: string;
   endPointPopulationParameter2Value: string;
+  pageTitle: string;
+  checkBoxTitle: string;
   plotTitle: string;
   plotLabelX: string;
   plotLabelY: string;
@@ -16,7 +17,6 @@ type _Config = {
 const Config: _Config = {
   nodeEnv: process.env.NODE_ENV || "NotDefined",
   apiKey: process.env.REACT_APP_RESAS_API_KEY || "NotDefined",
-  pageTitle: process.env.REACT_APP_PAGE_TITLE || "NotDefined",
   endPointPrefecture:
     process.env.REACT_APP_END_POINT_PREFECTURE ||
     "https://opendata.resas-portal.go.jp/api/v1/prefectures",
@@ -31,6 +31,8 @@ const Config: _Config = {
     process.env.REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE || "13",
   endPointPopulationParameter2Value:
     process.env.REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE || "-",
+  pageTitle: process.env.REACT_APP_PAGE_TITLE || "NotDefined",
+  checkBoxTitle: process.env.REACT_APP_CHECKBOX_TITLE || "NotDefined",
   plotTitle: process.env.REACT_APP_PLOT_TITLE || "人口構成",
   plotLabelX: process.env.REACT_APP_PLOT_LABEL_X || "年度",
   plotLabelY: process.env.REACT_APP_PLOT_LABEL_Y || "人口数",
