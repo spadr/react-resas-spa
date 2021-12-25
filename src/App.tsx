@@ -93,6 +93,20 @@ class App extends Component {
     this.getPopulation(Number(Config.endPointPopulationParameter1Value));
   }
 
+  Checkbox(props) {
+    console.log(props);
+    return (
+      <div key={props.code} style={{ margin: "5px", display: "inline-block" }}>
+        <input
+          type="checkbox"
+          checked={props.show}
+          onChange={() => this.getPopulation(props.code)}
+        />
+        {props.name}
+      </div>
+    );
+  }
+
   async getPrefecture() {
     const res1: Response = await fetch(Config.endPointPrefecture, {
       headers: { "X-API-KEY": Config.apiKey },
@@ -153,17 +167,20 @@ class App extends Component {
         series: series_copy,
         boundaryYear: data.result.boundaryYear,
       });
-      console.log(series_copy);
-      console.log(data.result.boundaryYear);
     } else {
       console.error("Could not GET Population data");
     }
   }
 
   render() {
+    const plot_data = this.state.series;
+    console.log("----------------------");
     return (
       <div>
         <h1>Title</h1>
+        <h2>都道府県</h2>
+        {Object.keys(plot_data).map((i) => this.Checkbox(plot_data[i]))}
+        <h2>{Config.plotTitle}</h2>
       </div>
     );
   }
