@@ -1,3 +1,4 @@
+import { tmpdir } from "os";
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
 import Config from "./config";
@@ -155,11 +156,13 @@ class App extends Component {
       const series_copy = this.state.series.slice();
       const init = [];
       Object.keys(data.result.data[0].data).forEach((i) => {
-        const tpm = {
-          x: data.result.data[0].data[i].year,
-          y: data.result.data[0].data[i].value,
-        };
-        init.push(tpm);
+        if (data.result.data[0].data[i].year <= data.result.boundaryYear) {
+          const tpm = {
+            x: data.result.data[0].data[i].year,
+            y: data.result.data[0].data[i].value,
+          };
+          init.push(tpm);
+        }
       });
       series_copy[index - 1].data = init; //配列は0から
       series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
