@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import axios from "axios";
+import styled from "styled-components";
 
 import Config from "./config";
 
@@ -149,23 +150,43 @@ function App() {
 
   const CheckBox = (data: _Series) => {
     return (
-      <div key={data.code} style={{ margin: "5px", display: "inline-block" }}>
+      <StyledCheckBox key={data.code}>
         <input
           type="checkbox"
           checked={data.show}
           onChange={() => fetchPopulation(data.code)}
         />
         {data.name}
-      </div>
+      </StyledCheckBox>
     );
   };
 
+  const StyledCheckBox = styled.div`
+    margin: 5px;
+    display: inline-block;
+  `;
+
+  const StyledBox = styled.div`
+    background-color: rgba(130, 130, 180, 0.01);
+  `;
+
+  const StyledTitle = styled.h1`
+    text-align: center;
+    color: rgba(70, 70, 90, 0.999);
+    background-color: rgba(130, 130, 180, 0.08);
+    width: 100%;
+  `;
+
+  const StyledMiniTitle = styled.h2`
+    color: rgba(70, 70, 90, 0.999);
+  `;
+
   return (
     <div>
-      <h1>{Config.pageTitle}</h1>
-      <h2>{Config.checkBoxTitle}</h2>
+      <StyledTitle>{Config.pageTitle}</StyledTitle>
+      <StyledMiniTitle>{Config.checkBoxTitle}</StyledMiniTitle>
       {Object.keys(plot_data).map((i) => CheckBox(plot_data[i]))}
-      <h2>{Config.plotTitle}</h2>
+      <StyledMiniTitle>{Config.plotTitle}</StyledMiniTitle>
       <Chart
         options={options}
         series={show_series}
