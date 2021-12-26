@@ -1,5 +1,4 @@
 # RESAS API + Ract + Typescript + ApexCharts
-デモページ : https://laughing-hamilton-a7fc9e.netlify.app/
 
 ## Scripts
 
