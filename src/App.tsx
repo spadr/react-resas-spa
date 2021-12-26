@@ -12,15 +12,6 @@ interface _seriesXY {
   y: number;
 }
 
-interface _Prefecture {
-  message: string;
-  result: [
-    {
-      prefCode: number;
-      prefName: string;
-    }
-  ];
-}
 
 interface _Population {
   boundaryYear: number;
@@ -64,10 +55,14 @@ const StyledMiniTitle = styled.h2`
   color: rgba(70, 70, 90, 0.999);
 `;
 
+
 const options = {
   chart: {
     id: "population-line",
   },
+  /*legend: {
+    position: right,
+  },エラーになるので使えない*/
   yaxis: {
     title: {
       text: Config.plotLabelY,
