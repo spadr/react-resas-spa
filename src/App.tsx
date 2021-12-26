@@ -76,8 +76,6 @@ const options = {
 function App() {
   // Declare a new state variable, which we'll call "series" and "options"
   const [series, setSeries] = useState<_Series[]>([]);
-  const [index, setIndex] = useState<number>(Number(Config.endPointPopulationParameter1Value));
-  //const [options, setOptions] = useState({});
 
   useEffect(() => {
     axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
