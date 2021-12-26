@@ -12,7 +12,6 @@ interface _seriesXY {
   y: number;
 }
 
-
 interface _Population {
   boundaryYear: number;
   data: [
@@ -55,7 +54,6 @@ const StyledMiniTitle = styled.h2`
   color: rgba(70, 70, 90, 0.999);
 `;
 
-
 const options = {
   chart: {
     id: "population-line",
@@ -91,38 +89,33 @@ function App() {
         console.error("Could not GET Prefecture data");
       })*/
 
-    //fetchPopulation(Number(Config.endPointPopulationParameter1Value));
+    fetchPopulation(Number(Config.endPointPopulationParameter1Value));
   }, []);
 
   const fetchPopulation = (index: number) => {
-    if (series[index - 1].data.length == 0) {
-      axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
-      const prefUrl =
-        Config.endPointPopulation +
-        "?" +
-        Config.endPointPopulationParameter1 +
-        "=" +
-        index + //都道府県コードは1から
-        "&" +
-        Config.endPointPopulationParameter2 +
-        "=" +
-        Config.endPointPopulationParameter2Value;
+    axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
+    const prefUrl =
+      Config.endPointPopulation +
+      "?" +
+      Config.endPointPopulationParameter1 +
+      "=" +
+      index + //都道府県コードは1から
+      "&" +
+      Config.endPointPopulationParameter2 +
+      "=" +
+      Config.endPointPopulationParameter2Value;
 
-      axios.get(prefUrl).then((res) => {
-        const data: _Population = res.data.result;
-        const series_copy = series.slice();
-        const init = parsePopulation(data);
-        series_copy[index - 1].data = init; //配列は0から
-        series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
-        setSeries(series_copy);
-      });
-      /*.catch((error) => {
-        console.error("Could not GET Population data");
-      })*/
-    } else {
+    axios.get(prefUrl).then((res) => {
+      const data: _Population = res.data.result;
+      const series_copy = series.slice();
+      const init = parsePopulation(data);
+      series_copy[index - 1].data = init; //配列は0から
       series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
       setSeries(series_copy);
-    }
+    });
+    /*.catch((error) => {
+        console.error("Could not GET Population data");
+      })*/
   };
 
   const plot_data = series;
