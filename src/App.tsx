@@ -1,7 +1,13 @@
-import { tmpdir } from "os";
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
+import axios from "axios";
+
 import Config from "./config";
+
+interface _prefData {
+  year: number;
+  value: number;
+}
 
 interface _Prefecture {
   message: string;
@@ -34,108 +40,47 @@ interface _Population {
 }
 
 interface _Series {
-  series: [
-    {
-      show: boolean;
-      name: string;
-      code: number;
-      data: [
-        {
-          x: number;
-          y: number;
-        }
-      ];
-    }
-  ];
-  xaxis: {
-    type: string;
-    title: string;
-  };
-  yaxis: {
-    type: string;
-    title: string;
-  };
-  boundaryYear: number;
+  show: boolean;
+  name: string;
+  code: number;
+  data: _prefData[];
 }
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      series: [],
-      options: {
-        chart: {
-          id: "population-line",
-        },
-        legend: {
-          position: "right",
-        },
-        yaxis: {
-          title: {
-            text: Config.plotLabelY,
-          },
-        },
-        xaxis: {
-          title: {
-            text: Config.plotLabelX,
-          },
-          type: "datetime",
-          labels: {
-            formatter: function (value: string, timestamp: string, opts) {
-              return opts.dateFormatter(new Date(timestamp), "yyyy");
-            },
-          },
+function App() {
+  // Declare a new state variable, which we'll call "series" and "options"
+  const [series, setSeries] = useState([]);
+  const [options, setOptions] = useState({
+    chart: {
+      id: "population-line",
+    },
+    legend: {
+      position: "right",
+    },
+    yaxis: {
+      title: {
+        text: Config.plotLabelY,
+      },
+    },
+    xaxis: {
+      title: {
+        text: Config.plotLabelX,
+      },
+      type: "datetime",
+      labels: {
+        formatter: function (value: string, timestamp: string, opts) {
+          return opts.dateFormatter(new Date(timestamp), "yyyy");
         },
       },
-    };
-  }
+    },
+  });
 
-  componentDidMount() {
-    this.getPrefecture();
-    this.getPopulation(Number(Config.endPointPopulationParameter1Value));
-  }
+  useEffect(() => {
+    fetchPrefecture();
+    //fetchPopulation(Number(Config.endPointPopulationParameter1Value));
+  }, []);
 
-  Checkbox(props) {
-    return (
-      <div key={props.code} style={{ margin: "5px", display: "inline-block" }}>
-        <input
-          type="checkbox"
-          checked={props.show}
-          onChange={() => this.getPopulation(props.code)}
-        />
-        {props.name}
-      </div>
-    );
-  }
-
-  async getPrefecture() {
-    const res1: Response = await fetch(Config.endPointPrefecture, {
-      headers: { "X-API-KEY": Config.apiKey },
-    });
-
-    if (res1.ok) {
-      const data = (await res1.json()) as _Prefecture;
-      const pref = data.result.slice();
-      const init = [];
-
-      for (let i = 0; i < pref.length; i++) {
-        const tpm_init = {
-          show: false,
-          name: pref[i].prefName,
-          code: pref[i].prefCode,
-          data: [],
-        };
-        init.push(tpm_init);
-      }
-      this.setState({
-        series: init,
-      });
-    } else {
-      console.error("Could not GET Prefecture data");
-    }
-  }
-
-  async getPopulation(index: number) {
+  const fetchPopulation = (index: number) => {
+    axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
     const prefUrl =
       Config.endPointPopulation +
       "?" +
@@ -147,17 +92,13 @@ class App extends Component {
       "=" +
       Config.endPointPopulationParameter2Value;
 
-    const res2: Response = await fetch(prefUrl, {
-      headers: { "X-API-KEY": Config.apiKey },
-    });
-
-    if (res2.ok) {
-      const data = (await res2.json()) as _Population;
-      const series_copy = this.state.series.slice();
-      const init = [];
+    axios.get(prefUrl).then((result) => {
+      const data: _Population = result.data;
+      const series_copy = series.slice();
+      const init: _prefData[] = [];
       Object.keys(data.result.data[0].data).forEach((i) => {
         if (data.result.data[0].data[i].year <= data.result.boundaryYear) {
-          const tpm = {
+          const tpm: _prefData = {
             x: data.result.data[0].data[i].year,
             y: data.result.data[0].data[i].value,
           };
@@ -166,41 +107,74 @@ class App extends Component {
       });
       series_copy[index - 1].data = init; //配列は0から
       series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
-      this.setState({
-        series: series_copy,
-        boundaryYear: data.result.boundaryYear,
-      });
-    } else {
-      console.error("Could not GET Population data");
+      setSeries(series_copy);
+      console.log(series_copy);
+    });
+    /*.catch((error) => {
+        console.error("Could not GET Population data");
+      })*/
+  };
+
+  const fetchPrefecture = () => {
+    axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
+    const url = Config.endPointPrefecture;
+    axios.get(url).then((result) => {
+      const data: _Prefecture = result.data;
+      const pref = data.result.slice();
+      const init: _Series[] = [];
+      for (let i = 0; i < pref.length; i++) {
+        const tpm_init: _Series = {
+          show: false,
+          name: pref[i].prefName,
+          code: pref[i].prefCode,
+          data: [],
+        };
+        init.push(tpm_init);
+      }
+      setSeries(init);
+    });
+    /*.catch((error) => {
+        console.error("Could not GET Prefecture data");
+      })*/
+  };
+
+  const plot_data = series;
+  const series_copy = series.slice();
+  const show_series: _Series[] = [];
+  for (let i = 0; i < series_copy.length; i++) {
+    if (series_copy[i].show) {
+      show_series.push(series_copy[i]);
     }
   }
 
-  render() {
-    const plot_data = this.state.series;
-    const series_copy = this.state.series.slice();
-    const show_series = [];
-    for (let i = 0; i < series_copy.length; i++) {
-      if (series_copy[i].show) {
-        show_series.push(series_copy[i]);
-      }
-    }
-    console.log(show_series);
+  const CheckBox = (data: _Series) => {
     return (
-      <div>
-        <h1>{Config.pageTitle}</h1>
-        <h2>{Config.checkBoxTitle}</h2>
-        {Object.keys(plot_data).map((i) => this.Checkbox(plot_data[i]))}
-        <h2>{Config.plotTitle}</h2>
-        <Chart
-          options={this.state.options}
-          series={show_series}
-          type="line"
-          width="100%"
-          height="100%"
+      <div key={data.code} style={{ margin: "5px", display: "inline-block" }}>
+        <input
+          type="checkbox"
+          checked={data.show}
+          onChange={() => fetchPopulation(data.code)}
         />
+        {data.name}
       </div>
     );
-  }
+  };
+
+  return (
+    <div>
+      <h1>{Config.pageTitle}</h1>
+      <h2>{Config.checkBoxTitle}</h2>
+      {Object.keys(plot_data).map((i) => CheckBox(plot_data[i]))}
+      <h2>{Config.plotTitle}</h2>
+      <Chart
+        options={options}
+        series={show_series}
+        type="line"
+        width="100%"
+        height="100%"
+      />
+    </div>
+  );
 }
 
 export default App;
