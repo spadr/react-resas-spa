@@ -76,6 +76,7 @@ const options = {
 function App() {
   // Declare a new state variable, which we'll call "series" and "options"
   const [series, setSeries] = useState<_Series[]>([]);
+  const [index, setIndex] = useState<number>(Number(Config.endPointPopulationParameter1Value));
   //const [options, setOptions] = useState({});
 
   useEffect(() => {
@@ -89,8 +90,9 @@ function App() {
         console.error("Could not GET Prefecture data");
       })*/
 
-    fetchPopulation(Number(Config.endPointPopulationParameter1Value));
+    
   }, []);
+
 
   const fetchPopulation = (index: number) => {
     axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
