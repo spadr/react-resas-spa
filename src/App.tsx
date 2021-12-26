@@ -4,6 +4,8 @@ import axios from "axios";
 import styled from "styled-components";
 
 import Config from "./config";
+import { parsePrefecture } from "./components/parsePref";
+import { parsePopulation } from "./components/parsePopu";
 
 interface _prefData {
   year: number;
@@ -76,67 +78,48 @@ function App() {
   });
 
   useEffect(() => {
-    fetchPrefecture();
-    //fetchPopulation(Number(Config.endPointPopulationParameter1Value));
-  }, []);
-
-  const fetchPopulation = (index: number) => {
-    axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
-    const prefUrl =
-      Config.endPointPopulation +
-      "?" +
-      Config.endPointPopulationParameter1 +
-      "=" +
-      index + //都道府県コードは1から
-      "&" +
-      Config.endPointPopulationParameter2 +
-      "=" +
-      Config.endPointPopulationParameter2Value;
-
-    axios.get(prefUrl).then((result) => {
-      const data: _Population = result.data;
-      const series_copy = series.slice();
-      const init: _prefData[] = [];
-      Object.keys(data.result.data[0].data).forEach((i) => {
-        if (data.result.data[0].data[i].year <= data.result.boundaryYear) {
-          const tpm: _prefData = {
-            x: data.result.data[0].data[i].year,
-            y: data.result.data[0].data[i].value,
-          };
-          init.push(tpm);
-        }
-      });
-      series_copy[index - 1].data = init; //配列は0から
-      series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
-      setSeries(series_copy);
-      console.log(series_copy);
-    });
-    /*.catch((error) => {
-        console.error("Could not GET Population data");
-      })*/
-  };
-
-  const fetchPrefecture = () => {
     axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
     const url = Config.endPointPrefecture;
-    axios.get(url).then((result) => {
-      const data: _Prefecture = result.data;
-      const pref = data.result.slice();
-      const init: _Series[] = [];
-      for (let i = 0; i < pref.length; i++) {
-        const tpm_init: _Series = {
-          show: false,
-          name: pref[i].prefName,
-          code: pref[i].prefCode,
-          data: [],
-        };
-        init.push(tpm_init);
-      }
-      setSeries(init);
+    axios.get(url).then((res) => {
+      const parsed = parsePrefecture(res.data.result);
+      setSeries(parsed);
     });
     /*.catch((error) => {
         console.error("Could not GET Prefecture data");
       })*/
+    //fetchPopulation(Number(Config.endPointPopulationParameter1Value));
+  }, []);
+
+  const fetchPopulation = (index: number) => {
+    if (series[index - 1].data.length == 0) {
+      axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
+      const prefUrl =
+        Config.endPointPopulation +
+        "?" +
+        Config.endPointPopulationParameter1 +
+        "=" +
+        index + //都道府県コードは1から
+        "&" +
+        Config.endPointPopulationParameter2 +
+        "=" +
+        Config.endPointPopulationParameter2Value;
+
+      axios.get(prefUrl).then((res) => {
+        const data: _Population = res.data.result;
+        const series_copy = series.slice();
+        const init = parsePopulation(data);
+        series_copy[index - 1].data = init; //配列は0から
+        series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
+        setSeries(series_copy);
+        console.log(series_copy);
+      });
+      /*.catch((error) => {
+        console.error("Could not GET Population data");
+      })*/
+    } else {
+      series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
+      setSeries(series_copy);
+    }
   };
 
   const plot_data = series;
