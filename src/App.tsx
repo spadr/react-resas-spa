@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import axios from "axios";
 import styled from "styled-components";
@@ -7,9 +7,9 @@ import Config from "./config";
 import { parsePrefecture } from "./components/parsePref";
 import { parsePopulation } from "./components/parsePopu";
 
-interface _prefData {
-  year: number;
-  value: number;
+interface _seriesXY {
+  x: number;
+  y: number;
 }
 
 interface _Prefecture {
@@ -23,19 +23,14 @@ interface _Prefecture {
 }
 
 interface _Population {
-  message: string;
-  result: [
+  boundaryYear: number;
+  data: [
     {
-      boundaryYear: number;
+      label: string;
       data: [
         {
-          label: string;
-          data: [
-            {
-              year: number;
-              value: number;
-            }
-          ];
+          year: number;
+          value: number;
         }
       ];
     }
@@ -46,47 +41,61 @@ interface _Series {
   show: boolean;
   name: string;
   code: number;
-  data: _prefData[];
+  data: _seriesXY[];
 }
+
+const StyledCheckBox = styled.div`
+  margin: 5px;
+  display: inline-block;
+`;
+
+const StyledBox = styled.div`
+  background-color: rgba(130, 130, 180, 0.01);
+`;
+
+const StyledTitle = styled.h1`
+  text-align: center;
+  color: rgba(70, 70, 90, 0.999);
+  background-color: rgba(130, 130, 180, 0.08);
+  width: 100%;
+`;
+
+const StyledMiniTitle = styled.h2`
+  color: rgba(70, 70, 90, 0.999);
+`;
+
+const options = {
+  chart: {
+    id: "population-line",
+  },
+  yaxis: {
+    title: {
+      text: Config.plotLabelY,
+    },
+  },
+  xaxis: {
+    title: {
+      text: Config.plotLabelX,
+    },
+  },
+};
 
 function App() {
   // Declare a new state variable, which we'll call "series" and "options"
-  const [series, setSeries] = useState([]);
-  const [options, setOptions] = useState({
-    chart: {
-      id: "population-line",
-    },
-    legend: {
-      position: "right",
-    },
-    yaxis: {
-      title: {
-        text: Config.plotLabelY,
-      },
-    },
-    xaxis: {
-      title: {
-        text: Config.plotLabelX,
-      },
-      type: "datetime",
-      labels: {
-        formatter: function (value: string, timestamp: string, opts) {
-          return opts.dateFormatter(new Date(timestamp), "yyyy");
-        },
-      },
-    },
-  });
+  const [series, setSeries] = useState<_Series[]>([]);
+  //const [options, setOptions] = useState({});
 
   useEffect(() => {
     axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
     const url = Config.endPointPrefecture;
     axios.get(url).then((res) => {
-      const parsed = parsePrefecture(res.data.result);
+      const parsed: _Series[] = parsePrefecture(res.data.result);
       setSeries(parsed);
     });
     /*.catch((error) => {
         console.error("Could not GET Prefecture data");
       })*/
+
     //fetchPopulation(Number(Config.endPointPopulationParameter1Value));
   }, []);
 
@@ -111,7 +120,6 @@ function App() {
         series_copy[index - 1].data = init; //配列は0から
         series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
         setSeries(series_copy);
-        console.log(series_copy);
       });
       /*.catch((error) => {
         console.error("Could not GET Population data");
@@ -144,31 +152,11 @@ function App() {
     );
   };
 
-  const StyledCheckBox = styled.div`
-    margin: 5px;
-    display: inline-block;
-  `;
-
-  const StyledBox = styled.div`
-    background-color: rgba(130, 130, 180, 0.01);
-  `;
-
-  const StyledTitle = styled.h1`
-    text-align: center;
-    color: rgba(70, 70, 90, 0.999);
-    background-color: rgba(130, 130, 180, 0.08);
-    width: 100%;
-  `;
-
-  const StyledMiniTitle = styled.h2`
-    color: rgba(70, 70, 90, 0.999);
-  `;
-
   return (
     <div>
       <StyledTitle>{Config.pageTitle}</StyledTitle>
       <StyledMiniTitle>{Config.checkBoxTitle}</StyledMiniTitle>
-      {Object.keys(plot_data).map((i) => CheckBox(plot_data[i]))}
+      {Object.keys(plot_data).map((i) => CheckBox(plot_data[Number(i)]))}
       <StyledMiniTitle>{Config.plotTitle}</StyledMiniTitle>
       <Chart
         options={options}
