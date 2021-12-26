@@ -4,7 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import styled from "styled-components";
 
-const StyledBody = styled.body`
+const StyledDiv = styled.div`
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -22,9 +22,9 @@ const StyledCode = styled.code`
 
 ReactDOM.render(
   <React.StrictMode>
-    <StyledBody>
+    <StyledDiv>
       <App />
-    </StyledBody>
+    </StyledDiv>
   </React.StrictMode>,
   document.getElementById("root")
 );

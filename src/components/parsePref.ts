@@ -7,12 +7,12 @@ interface _Series {
   show: boolean;
   name: string;
   code: number;
-  data: _prefData[];
+  data: _seriesXY[];
 }
 
-interface _prefData {
-  year: number;
-  value: number;
+interface _seriesXY {
+  x: number;
+  y: number;
 }
 
 function parsePrefecture(input: _Prefecture[]) {
