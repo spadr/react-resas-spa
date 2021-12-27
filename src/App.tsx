@@ -80,8 +80,9 @@ function App() {
   useEffect(() => {
     axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
     const url = Config.endPointPrefecture;
-    axios.get(url).then((res) => {
-      const parsed: _Series[] = parsePrefecture(res.data.result);
+    console.log("fetch:"+url);
+    axios.get(url).then((res1) => {
+      const parsed: _Series[] = parsePrefecture(res1.data.result);
       setSeries(parsed);
     });
     /*.catch((error) => {
@@ -104,9 +105,9 @@ function App() {
       Config.endPointPopulationParameter2 +
       "=" +
       Config.endPointPopulationParameter2Value;
-
-    axios.get(prefUrl).then((res) => {
-      const data: _Population = res.data.result;
+    console.log("fetch:"+prefUrl);
+    axios.get(prefUrl).then((res2) => {
+      const data: _Population = res2.data.result;
       const series_copy = series.slice();
       const init = parsePopulation(data);
       series_copy[index - 1].data = init; //配列は0から
