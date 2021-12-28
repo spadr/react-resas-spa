@@ -7,12 +7,7 @@ import { parsePrefecture } from "./components/parsePref";
 import { parsePopulation } from "./components/parsePopu";
 
 import { _seriesXY, _Series, _Population, _Prefecture } from "./types";
-import {
-  StyledCheckBox,
-  StyledBox,
-  StyledTitle,
-  StyledMiniTitle,
-} from "./styles";
+import { StyledCheckBox, StyledTitle, StyledMiniTitle } from "./styles";
 
 const options = {
   chart: {
@@ -34,8 +29,8 @@ const options = {
 };
 
 function App() {
-  // Declare a new state variable, which we'll call "series" and "options"
   const [series, setSeries] = useState<_Series[]>([]);
+  const [loading, setLoading] = useState<boolean[]>([]);
 
   useEffect(() => {
     axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
@@ -44,6 +39,7 @@ function App() {
     axios.get(url).then((res1) => {
       const parsed: _Series[] = parsePrefecture(res1.data.result);
       setSeries(parsed);
+      setLoading(Array(parsed.length).fill(true));
     });
     /*.catch((error) => {
         console.error("Could not GET Prefecture data");
@@ -51,26 +47,33 @@ function App() {
   }, []);
 
   const fetchPopulation = (index: number) => {
-    axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
-    const prefUrl =
-      Config.endPointPopulation +
-      "?" +
-      Config.endPointPopulationParameter1 +
-      "=" +
-      index + //都道府県コードは1から
-      "&" +
-      Config.endPointPopulationParameter2 +
-      "=" +
-      Config.endPointPopulationParameter2Value;
-    console.log("fetch:" + prefUrl);
-    axios.get(prefUrl).then((res2) => {
-      const data: _Population = res2.data.result;
-      const series_copy = series.slice();
-      const init = parsePopulation(data);
-      series_copy[index - 1].data = init; //配列は0から
-      series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
-      setSeries(series_copy);
-    });
+    if (loading[index - 1]) {
+      axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
+      const prefUrl =
+        Config.endPointPopulation +
+        "?" +
+        Config.endPointPopulationParameter1 +
+        "=" +
+        index + //都道府県コードは1から
+        "&" +
+        Config.endPointPopulationParameter2 +
+        "=" +
+        Config.endPointPopulationParameter2Value;
+      console.log("fetch:" + prefUrl);
+      axios.get(prefUrl).then((res2) => {
+        const data: _Population = res2.data.result;
+        const series_copy = series.slice();
+        const init = parsePopulation(data);
+        series_copy[index - 1].data = init; //配列は0から
+        series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
+        loading[index - 1] = false; //配列は0から
+        setSeries(series_copy);
+      });
+    } else {
+      const series_copy_ = series.slice();
+      series_copy_[index - 1].show = !series_copy_[index - 1].show; //配列は0から
+      setSeries(series_copy_);
+    }
     /*.catch((error) => {
         console.error("Could not GET Population data");
       })*/
