@@ -1,19 +1,4 @@
-interface _Prefecture {
-  prefCode: number;
-  prefName: string;
-}
-
-interface _Series {
-  show: boolean;
-  name: string;
-  code: number;
-  data: _seriesXY[];
-}
-
-interface _seriesXY {
-  x: number;
-  y: number;
-}
+import { _seriesXY, _Series, _Population, _Prefecture } from "../types";
 
 function parsePrefecture(input: _Prefecture[]) {
   const out: _Series[] = [];

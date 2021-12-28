@@ -1,18 +1,4 @@
-interface _seriesXY {
-  x: number;
-  y: number;
-}
-
-interface _Population {
-  boundaryYear: number;
-  data: {
-    data: {
-      value: number;
-      year: number;
-    }[];
-    label: string;
-  }[];
-}
+import { _seriesXY, _Series, _Population, _Prefecture } from "../types";
 
 function parsePopulation(input: _Population) {
   const out = [];
