@@ -25,7 +25,7 @@
 
 ### `.env.exampleを.envにリネーム` $ mv .env.example .env
 
-### .envにRESASで取得した自分のAPI_KEYを記入する` $ nano .env
+### `.envにRESASで取得した自分のAPI_KEYを記入する` $ nano .env
 
 ### `イメージをビルドし、コンテナを起動` $ docker-compose up -d --build
 
