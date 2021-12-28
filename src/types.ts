@@ -26,22 +26,4 @@ interface _Series {
   data: _seriesXY[];
 }
 
-interface _Options {
-  chart: { id: string };
-  legend: {
-    position: "right" | "top" | "bottom" | "left" | undefined;
-    inverseOrder: boolean;
-  };
-  yaxis: {
-    title: {
-      text: string;
-    };
-  };
-  xaxis: {
-    title: {
-      text: string;
-    };
-  };
-}
-
-export type { _seriesXY, _Series, _Population, _Prefecture, _Options };
+export type { _seriesXY, _Series, _Population, _Prefecture };
