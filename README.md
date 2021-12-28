@@ -35,7 +35,7 @@ $ docker-compose down
 
 ## Scripts
 
-###  : "react-scripts start"
+### `npm run start` : "react-scripts start"
 
 ### `npm run test` : Jest でテスト
 
