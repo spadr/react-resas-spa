@@ -1,11 +1,8 @@
 import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import Config from "../config";
+import { _seriesXY, _Series, _Population, _Prefecture } from "../types";
 
-interface _Prefecture {
-  prefCode: number;
-  prefName: string;
-}
 
 async function fetchPrefecture() {
   axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;

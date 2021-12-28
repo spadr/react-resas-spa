@@ -1,58 +1,14 @@
 import React, { useMemo, useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import axios from "axios";
-import styled from "styled-components";
 
 import Config from "./config";
 import { parsePrefecture } from "./components/parsePref";
 import { parsePopulation } from "./components/parsePopu";
 
-interface _seriesXY {
-  x: number;
-  y: number;
-}
+import { _seriesXY, _Series, _Population, _Prefecture } from "./types";
+import { StyledCheckBox, StyledBox, StyledTitle, StyledMiniTitle } from "./styles"
 
-interface _Population {
-  boundaryYear: number;
-  data: [
-    {
-      label: string;
-      data: [
-        {
-          year: number;
-          value: number;
-        }
-      ];
-    }
-  ];
-}
-
-interface _Series {
-  show: boolean;
-  name: string;
-  code: number;
-  data: _seriesXY[];
-}
-
-const StyledCheckBox = styled.div`
-  margin: 5px;
-  display: inline-block;
-`;
-
-const StyledBox = styled.div`
-  background-color: rgba(130, 130, 180, 0.01);
-`;
-
-const StyledTitle = styled.h1`
-  text-align: center;
-  color: rgba(70, 70, 90, 0.999);
-  background-color: rgba(130, 130, 180, 0.08);
-  width: 100%;
-`;
-
-const StyledMiniTitle = styled.h2`
-  color: rgba(70, 70, 90, 0.999);
-`;
 
 const options = {
   chart: {
