@@ -3,9 +3,10 @@
 
 開発環境：https://github.com/spadr/react-develop
 
+
 ## Scripts
 
-### `npm start` : "PORT=3000 react-scripts start"
+### `npm start` : "react-scripts start"
 
 ### `npm run test` : Jest でテスト
 
@@ -13,35 +14,27 @@
 
 ### `npm run lint` : "eslint --fix --ext .jsx,.js,.tsx,.ts ."
 
-### 動作確認のための手順
 
-```
-#開発環境をGit cloneする
-$ git clone https://github.com/spadr/react-develop.git
+## 動作確認のための手順
 
-#cdを移動
-$ cd react-develop
+### `開発環境をGit clone` $ git clone https://github.com/spadr/react-develop.git
 
-#このリポジトリをGit cloneする
-$ git clone https://github.com/spadr/react-resas-spa.git app
+### `cdを移動` $ cd react-develop
 
-#.env.exampleを.envにリネーム
-$ mv .env.example .env
+### `このリポジトリをGit clone` $ git clone https://github.com/spadr/react-resas-spa.git app
 
-#.envにRESASで取得した自分のAPI_KEYを記入する
+### `.env.exampleを.envにリネーム` $ mv .env.example .env
 
-#イメージをビルドし、コンテナを起動
-$ docker-compose up -d --build
+### .envにRESASで取得した自分のAPI_KEYを記入する` $ nano .env
 
-#ログを確認
-$ docker-compose logs -f node
+### `イメージをビルドし、コンテナを起動` $ docker-compose up -d --build
 
-#ブラウザで確認 デフォルトPORT=3000
+### `ログを確認` $ docker-compose logs -f node
 
-#必要に応じてコンテナのターミナルを叩く
-$ docker-compose exec node /bin/ash
+### `ブラウザで確認` $ http://localhost:3000/
 
-#コンテナを終了
-$ docker-compose down
+### `必要に応じてコンテナのターミナルを叩く` $ docker-compose exec node /bin/ash
 
-```
+### `コンテナを終了` $ docker-compose down
+
+
