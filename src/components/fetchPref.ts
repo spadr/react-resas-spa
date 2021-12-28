@@ -3,7 +3,6 @@ import axios from "axios";
 import Config from "../config";
 import { _seriesXY, _Series, _Population, _Prefecture } from "../types";
 
-
 async function fetchPrefecture() {
   axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
   const url = Config.endPointPrefecture;

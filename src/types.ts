@@ -1,30 +1,29 @@
 interface _seriesXY {
-    x: number;
-    y: number;
+  x: number;
+  y: number;
 }
 
 interface _Prefecture {
-    prefCode: number;
-    prefName: string;
+  prefCode: number;
+  prefName: string;
 }
 
 interface _Population {
-    boundaryYear: number;
+  boundaryYear: number;
+  data: {
     data: {
-        data: {
-            value: number;
-            year: number;
-        }[];
-        label: string;
+      value: number;
+      year: number;
     }[];
+    label: string;
+  }[];
 }
 
-
 interface _Series {
-    show: boolean;
-    name: string;
-    code: number;
-    data: _seriesXY[];
+  show: boolean;
+  name: string;
+  code: number;
+  data: _seriesXY[];
 }
 
 export type { _seriesXY, _Series, _Population, _Prefecture };
