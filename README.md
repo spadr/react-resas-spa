@@ -1,9 +1,11 @@
 # RESAS API + React + Typescript + ApexCharts
+
 デモページ：https://spadr.github.io/react-resas-spa/
 
 開発環境：https://github.com/spadr/react-develop
 
 ## 動作確認のための手順
+
 ```
 #開発環境をGit clone
 $ git clone https://github.com/spadr/react-develop.git
