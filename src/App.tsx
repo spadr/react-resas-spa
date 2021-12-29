@@ -8,25 +8,7 @@ import { parsePopulation } from "./components/parsePopu";
 
 import { _seriesXY, _Series, _Population, _Prefecture } from "./types";
 import { StyledCheckBox, StyledTitle, StyledMiniTitle } from "./styles";
-
-const options = {
-  chart: {
-    id: "population-line",
-  },
-  /*legend: {
-    position: right,
-  },エラーになるので使えない*/
-  yaxis: {
-    title: {
-      text: Config.plotLabelY,
-    },
-  },
-  xaxis: {
-    title: {
-      text: Config.plotLabelX,
-    },
-  },
-};
+import { options } from "./chartOptions";
 
 function App() {
   const [series, setSeries] = useState<_Series[]>([]);
