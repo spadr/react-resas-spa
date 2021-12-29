@@ -7,7 +7,7 @@ const options: _Options = {
   },
   legend: {
     position: "right",
-    inverseOrder: true,
+    inverseOrder: false,
     showForSingleSeries: false,
   },
   yaxis: {
