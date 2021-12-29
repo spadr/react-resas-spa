@@ -8,6 +8,7 @@ const options: _Options = {
   legend: {
     position: "right",
     inverseOrder: true,
+    showForSingleSeries: true,
   },
   yaxis: {
     title: {

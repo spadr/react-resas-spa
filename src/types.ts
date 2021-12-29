@@ -31,6 +31,7 @@ interface _Options {
   legend: {
     position: "right" | "top" | "bottom" | "left" | undefined;
     inverseOrder: boolean;
+    showForSingleSeries: boolean;
   };
   yaxis: {
     title: {
