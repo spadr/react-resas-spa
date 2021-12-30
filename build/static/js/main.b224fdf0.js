@@ -1,4 +1,4 @@
-/*! For license information please see main.5d4541fa.js.LICENSE.txt */
+/*! For license information please see main.b224fdf0.js.LICENSE.txt */
 !(function () {
   var e = {
       7910: function (e, t, i) {
@@ -40595,7 +40595,7 @@
           chart: { id: "population-line" },
           legend: {
             position: "right",
-            inverseOrder: !0,
+            inverseOrder: !1,
             showForSingleSeries: !1,
           },
           yaxis: { title: { text: c.plotLabelY } },
@@ -40631,6 +40631,11 @@
                     return t;
                   })(e.data.result);
                   a(t), h(Array(t.length).fill(!0));
+                })
+                .catch(function (e) {
+                  console.error("Could not GET Prefecture data"),
+                    console.error(e.response.status),
+                    console.error(e.message);
                 });
           }, []);
           for (var u = i, d = i.slice(), f = [], p = 0; p < d.length; p++)
@@ -40684,6 +40689,11 @@
                                   (r[e - 1].show = !r[e - 1].show),
                                   (o[e - 1] = !1),
                                   a(r);
+                              })
+                              .catch(function (e) {
+                                console.error("Could not GET Population data"),
+                                  console.error(e.response.status),
+                                  console.error(e.message);
                               });
                         } else {
                           var n = i.slice();
