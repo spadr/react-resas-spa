@@ -23,6 +23,7 @@ interface _Series {
   show: boolean;
   name: string;
   code: number;
+  isntLoad: boolean;
   data: _seriesXY[];
 }
 

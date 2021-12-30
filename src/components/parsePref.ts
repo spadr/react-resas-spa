@@ -5,6 +5,7 @@ function parsePrefecture(input: _Prefecture[]) {
   for (let i = 0; i < input.length; i++) {
     const tpm: _Series = {
       show: false,
+      isntLoad: true,
       name: input[i].prefName,
       code: input[i].prefCode,
       data: [],
