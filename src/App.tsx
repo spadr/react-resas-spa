@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import axios from "axios";
 
@@ -18,14 +18,18 @@ function App() {
     axios.defaults.headers.get["X-API-KEY"] = Config.apiKey;
     const url = Config.endPointPrefecture;
     console.log("fetch:" + url);
-    axios.get(url).then((res1) => {
-      const parsed: _Series[] = parsePrefecture(res1.data.result);
-      setSeries(parsed);
-      setLoading(Array(parsed.length).fill(true));
-    });
-    /*.catch((error) => {
+    axios
+      .get(url)
+      .then((res1) => {
+        const parsed: _Series[] = parsePrefecture(res1.data.result);
+        setSeries(parsed);
+        setLoading(Array(parsed.length).fill(true));
+      })
+      .catch((error) => {
         console.error("Could not GET Prefecture data");
-      })*/
+        console.error(error.response.status);
+        console.error(error.message);
+      });
   }, []);
 
   const fetchPopulation = (index: number) => {
@@ -42,23 +46,27 @@ function App() {
         "=" +
         Config.endPointPopulationParameter2Value;
       console.log("fetch:" + prefUrl);
-      axios.get(prefUrl).then((res2) => {
-        const data: _Population = res2.data.result;
-        const series_copy = series.slice();
-        const init = parsePopulation(data);
-        series_copy[index - 1].data = init; //配列は0から
-        series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
-        loading[index - 1] = false; //配列は0から
-        setSeries(series_copy);
-      });
+      axios
+        .get(prefUrl)
+        .then((res2) => {
+          const data: _Population = res2.data.result;
+          const series_copy = series.slice();
+          const init = parsePopulation(data);
+          series_copy[index - 1].data = init; //配列は0から
+          series_copy[index - 1].show = !series_copy[index - 1].show; //配列は0から
+          loading[index - 1] = false; //配列は0から
+          setSeries(series_copy);
+        })
+        .catch((error) => {
+          console.error("Could not GET Population data");
+          console.error(error.response.status);
+          console.error(error.message);
+        });
     } else {
       const series_copy_ = series.slice();
       series_copy_[index - 1].show = !series_copy_[index - 1].show; //配列は0から
       setSeries(series_copy_);
     }
-    /*.catch((error) => {
-        console.error("Could not GET Population data");
-      })*/
   };
 
   const plot_data = series;
