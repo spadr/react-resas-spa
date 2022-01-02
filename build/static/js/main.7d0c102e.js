@@ -1,4 +1,4 @@
-/*! For license information please see main.b224fdf0.js.LICENSE.txt */
+/*! For license information please see main.7d0c102e.js.LICENSE.txt */
 !(function () {
   var e = {
       7910: function (e, t, i) {
@@ -19643,17 +19643,15 @@
                       })),
                       e.forEach(function (e, o) {
                         var l = e.length === i.globals.dataPoints,
-                          c = t.graphics
-                            .group()
-                            .attr({
-                              class: "apexcharts-series",
-                              "data:longestSeries": l,
-                              seriesName: b.escapeString(
-                                i.globals.seriesNames[o]
-                              ),
-                              rel: o + 1,
-                              "data:realIndex": o,
-                            });
+                          c = t.graphics.group().attr({
+                            class: "apexcharts-series",
+                            "data:longestSeries": l,
+                            seriesName: b.escapeString(
+                              i.globals.seriesNames[o]
+                            ),
+                            rel: o + 1,
+                            "data:realIndex": o,
+                          });
                         (t.dataRadiusOfPercent[o] = []),
                           (t.dataRadius[o] = []),
                           (t.angleArr[o] = []),
@@ -24648,15 +24646,13 @@
               })),
               i.extend(i.Defs, {
                 pattern: function (e, t, a) {
-                  return this.put(new i.Pattern())
-                    .update(a)
-                    .attr({
-                      x: 0,
-                      y: 0,
-                      width: e,
-                      height: t,
-                      patternUnits: "userSpaceOnUse",
-                    });
+                  return this.put(new i.Pattern()).update(a).attr({
+                    x: 0,
+                    y: 0,
+                    width: e,
+                    height: t,
+                    patternUnits: "userSpaceOnUse",
+                  });
                 },
               }),
               (i.Shape = i.invent({
@@ -38431,15 +38427,12 @@
         );
       }
       var s = i(8446),
-        o = i(1881),
-        l = i.n(o),
-        c = {
+        o = {
           nodeEnv: "production",
           apiKey: "HtfSe2l3PMSXqKn8b6visxY9iRCkNy4rdjcs6zu7",
-          endPointPrefecture:
-            "https://opendata.resas-portal.go.jp/api/v1/prefectures",
-          endPointPopulation:
-            "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+          baseUrl: "https://opendata.resas-portal.go.jp/api/v1",
+          endPointPrefecture: "/prefectures",
+          endPointPopulation: "/population/composition/perYear",
           endPointPopulationParameter1: "prefCode",
           endPointPopulationParameter2: "cityCode",
           endPointPopulationParameter1Value: "13",
@@ -38450,10 +38443,78 @@
           plotLabelX: "\u5e74\u5ea6",
           plotLabelY: "\u4eba\u53e3\u6570",
         };
-      var h = i(6214),
-        u = i(9767),
-        d = i.n(u);
-      var f = function (e) {
+      function l(e, t) {
+        if (!(e instanceof t))
+          throw new TypeError("Cannot call a class as a function");
+      }
+      function c(e, t) {
+        for (var i = 0; i < t.length; i++) {
+          var a = t[i];
+          (a.enumerable = a.enumerable || !1),
+            (a.configurable = !0),
+            "value" in a && (a.writable = !0),
+            Object.defineProperty(e, a.key, a);
+        }
+      }
+      function h(e, t, i) {
+        return (
+          t && c(e.prototype, t),
+          i && c(e, i),
+          Object.defineProperty(e, "prototype", { writable: !1 }),
+          e
+        );
+      }
+      var u = i(1881),
+        d = i
+          .n(u)()
+          .create({ baseURL: o.baseUrl, headers: { "X-API-KEY": o.apiKey } }),
+        f = (function () {
+          function e() {
+            l(this, e);
+          }
+          return (
+            h(e, [
+              {
+                key: "getPrefecture",
+                value: function () {
+                  return d.get("".concat(o.endPointPrefecture));
+                },
+              },
+            ]),
+            e
+          );
+        })(),
+        p = (function () {
+          function e() {
+            l(this, e);
+          }
+          return (
+            h(e, [
+              {
+                key: "getPopulation",
+                value: function (e) {
+                  var t =
+                    o.endPointPopulation +
+                    "?" +
+                    o.endPointPopulationParameter1 +
+                    "=" +
+                    e +
+                    "&" +
+                    o.endPointPopulationParameter2 +
+                    "=" +
+                    o.endPointPopulationParameter2Value;
+                  return d.get("".concat(t));
+                },
+              },
+            ]),
+            e
+          );
+        })();
+      var g = { pref: new f(), popu: new p() },
+        x = i(6214),
+        m = i(9767),
+        b = i.n(m);
+      var v = function (e) {
           function t(e, a, l, c, d) {
             for (
               var f,
@@ -39121,7 +39182,7 @@
             c
           );
         },
-        p = {
+        y = {
           animationIterationCount: 1,
           borderImageOutset: 1,
           borderImageSlice: 1,
@@ -39168,25 +39229,25 @@
           strokeOpacity: 1,
           strokeWidth: 1,
         };
-      var g =
+      var w =
           /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|inert|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/,
-        x = (function (e) {
+        k = (function (e) {
           var t = {};
           return function (i) {
             return void 0 === t[i] && (t[i] = e(i)), t[i];
           };
         })(function (e) {
           return (
-            g.test(e) ||
+            w.test(e) ||
             (111 === e.charCodeAt(0) &&
               110 === e.charCodeAt(1) &&
               e.charCodeAt(2) < 91)
           );
         }),
-        m = i(7861),
-        b = i.n(m);
-      function v() {
-        return (v =
+        A = i(7861),
+        S = i.n(A);
+      function C() {
+        return (C =
           Object.assign ||
           function (e) {
             for (var t = 1; t < arguments.length; t++) {
@@ -39197,32 +39258,32 @@
             return e;
           }).apply(this, arguments);
       }
-      var y = function (e, t) {
+      var P = function (e, t) {
           for (var i = [e[0]], a = 0, n = t.length; a < n; a += 1)
             i.push(t[a], e[a + 1]);
           return i;
         },
-        w = function (e) {
+        E = function (e) {
           return (
             null !== e &&
             "object" == typeof e &&
             "[object Object]" ===
               (e.toString ? e.toString() : Object.prototype.toString.call(e)) &&
-            !(0, h.typeOf)(e)
+            !(0, x.typeOf)(e)
           );
         },
-        k = Object.freeze([]),
-        A = Object.freeze({});
-      function S(e) {
+        T = Object.freeze([]),
+        L = Object.freeze({});
+      function _(e) {
         return "function" == typeof e;
       }
-      function C(e) {
+      function R(e) {
         return e.displayName || e.name || "Component";
       }
-      function P(e) {
+      function I(e) {
         return e && "string" == typeof e.styledComponentId;
       }
-      var E =
+      var O =
           ("undefined" != typeof process &&
             ({
               NODE_ENV: "production",
@@ -39235,14 +39296,14 @@
               REACT_APP_PLOT_LABEL_Y: "\u4eba\u53e3\u6570",
               REACT_APP_END_POINT_POPULATION_PARAMETER1: "prefCode",
               REACT_APP_END_POINT_POPULATION_PARAMETER2: "cityCode",
-              REACT_APP_END_POINT_POPULATION:
-                "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+              REACT_APP_END_POINT_POPULATION: "/population/composition/perYear",
               REACT_APP_PLOT_TITLE: "\u4eba\u53e3\u69cb\u6210",
               REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE: "13",
               REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE: "-",
               REACT_APP_PAGE_TITLE: "RESAS API + React + Typescript",
-              REACT_APP_END_POINT_PREFECTURE:
-                "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+              REACT_APP_END_POINT_PREFECTURE: "/prefectures",
+              REACT_APP_RESAS_BASE_URL:
+                "https://opendata.resas-portal.go.jp/api/v1",
               REACT_APP_RESAS_API_KEY:
                 "HtfSe2l3PMSXqKn8b6visxY9iRCkNy4rdjcs6zu7",
               REACT_APP_CHECKBOX_TITLE: "\u90fd\u9053\u5e9c\u770c",
@@ -39259,20 +39320,21 @@
                 REACT_APP_END_POINT_POPULATION_PARAMETER1: "prefCode",
                 REACT_APP_END_POINT_POPULATION_PARAMETER2: "cityCode",
                 REACT_APP_END_POINT_POPULATION:
-                  "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+                  "/population/composition/perYear",
                 REACT_APP_PLOT_TITLE: "\u4eba\u53e3\u69cb\u6210",
                 REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE: "13",
                 REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE: "-",
                 REACT_APP_PAGE_TITLE: "RESAS API + React + Typescript",
-                REACT_APP_END_POINT_PREFECTURE:
-                  "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+                REACT_APP_END_POINT_PREFECTURE: "/prefectures",
+                REACT_APP_RESAS_BASE_URL:
+                  "https://opendata.resas-portal.go.jp/api/v1",
                 REACT_APP_RESAS_API_KEY:
                   "HtfSe2l3PMSXqKn8b6visxY9iRCkNy4rdjcs6zu7",
                 REACT_APP_CHECKBOX_TITLE: "\u90fd\u9053\u5e9c\u770c",
               }.SC_ATTR)) ||
           "data-styled",
-        T = "undefined" != typeof window && "HTMLElement" in window,
-        L = Boolean(
+        N = "undefined" != typeof window && "HTMLElement" in window,
+        M = Boolean(
           "boolean" == typeof SC_DISABLE_SPEEDY
             ? SC_DISABLE_SPEEDY
             : "undefined" != typeof process &&
@@ -39289,13 +39351,14 @@
                   REACT_APP_END_POINT_POPULATION_PARAMETER1: "prefCode",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2: "cityCode",
                   REACT_APP_END_POINT_POPULATION:
-                    "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+                    "/population/composition/perYear",
                   REACT_APP_PLOT_TITLE: "\u4eba\u53e3\u69cb\u6210",
                   REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE: "13",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE: "-",
                   REACT_APP_PAGE_TITLE: "RESAS API + React + Typescript",
-                  REACT_APP_END_POINT_PREFECTURE:
-                    "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+                  REACT_APP_END_POINT_PREFECTURE: "/prefectures",
+                  REACT_APP_RESAS_BASE_URL:
+                    "https://opendata.resas-portal.go.jp/api/v1",
                   REACT_APP_RESAS_API_KEY:
                     "HtfSe2l3PMSXqKn8b6visxY9iRCkNy4rdjcs6zu7",
                   REACT_APP_CHECKBOX_TITLE: "\u90fd\u9053\u5e9c\u770c",
@@ -39313,13 +39376,14 @@
                   REACT_APP_END_POINT_POPULATION_PARAMETER1: "prefCode",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2: "cityCode",
                   REACT_APP_END_POINT_POPULATION:
-                    "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+                    "/population/composition/perYear",
                   REACT_APP_PLOT_TITLE: "\u4eba\u53e3\u69cb\u6210",
                   REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE: "13",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE: "-",
                   REACT_APP_PAGE_TITLE: "RESAS API + React + Typescript",
-                  REACT_APP_END_POINT_PREFECTURE:
-                    "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+                  REACT_APP_END_POINT_PREFECTURE: "/prefectures",
+                  REACT_APP_RESAS_BASE_URL:
+                    "https://opendata.resas-portal.go.jp/api/v1",
                   REACT_APP_RESAS_API_KEY:
                     "HtfSe2l3PMSXqKn8b6visxY9iRCkNy4rdjcs6zu7",
                   REACT_APP_CHECKBOX_TITLE: "\u90fd\u9053\u5e9c\u770c",
@@ -39337,13 +39401,14 @@
                   REACT_APP_END_POINT_POPULATION_PARAMETER1: "prefCode",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2: "cityCode",
                   REACT_APP_END_POINT_POPULATION:
-                    "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+                    "/population/composition/perYear",
                   REACT_APP_PLOT_TITLE: "\u4eba\u53e3\u69cb\u6210",
                   REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE: "13",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE: "-",
                   REACT_APP_PAGE_TITLE: "RESAS API + React + Typescript",
-                  REACT_APP_END_POINT_PREFECTURE:
-                    "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+                  REACT_APP_END_POINT_PREFECTURE: "/prefectures",
+                  REACT_APP_RESAS_BASE_URL:
+                    "https://opendata.resas-portal.go.jp/api/v1",
                   REACT_APP_RESAS_API_KEY:
                     "HtfSe2l3PMSXqKn8b6visxY9iRCkNy4rdjcs6zu7",
                   REACT_APP_CHECKBOX_TITLE: "\u90fd\u9053\u5e9c\u770c",
@@ -39360,13 +39425,14 @@
                 REACT_APP_END_POINT_POPULATION_PARAMETER1: "prefCode",
                 REACT_APP_END_POINT_POPULATION_PARAMETER2: "cityCode",
                 REACT_APP_END_POINT_POPULATION:
-                  "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+                  "/population/composition/perYear",
                 REACT_APP_PLOT_TITLE: "\u4eba\u53e3\u69cb\u6210",
                 REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE: "13",
                 REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE: "-",
                 REACT_APP_PAGE_TITLE: "RESAS API + React + Typescript",
-                REACT_APP_END_POINT_PREFECTURE:
-                  "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+                REACT_APP_END_POINT_PREFECTURE: "/prefectures",
+                REACT_APP_RESAS_BASE_URL:
+                  "https://opendata.resas-portal.go.jp/api/v1",
                 REACT_APP_RESAS_API_KEY:
                   "HtfSe2l3PMSXqKn8b6visxY9iRCkNy4rdjcs6zu7",
                 REACT_APP_CHECKBOX_TITLE: "\u90fd\u9053\u5e9c\u770c",
@@ -39385,13 +39451,14 @@
                   REACT_APP_END_POINT_POPULATION_PARAMETER1: "prefCode",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2: "cityCode",
                   REACT_APP_END_POINT_POPULATION:
-                    "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+                    "/population/composition/perYear",
                   REACT_APP_PLOT_TITLE: "\u4eba\u53e3\u69cb\u6210",
                   REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE: "13",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE: "-",
                   REACT_APP_PAGE_TITLE: "RESAS API + React + Typescript",
-                  REACT_APP_END_POINT_PREFECTURE:
-                    "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+                  REACT_APP_END_POINT_PREFECTURE: "/prefectures",
+                  REACT_APP_RESAS_BASE_URL:
+                    "https://opendata.resas-portal.go.jp/api/v1",
                   REACT_APP_RESAS_API_KEY:
                     "HtfSe2l3PMSXqKn8b6visxY9iRCkNy4rdjcs6zu7",
                   REACT_APP_CHECKBOX_TITLE: "\u90fd\u9053\u5e9c\u770c",
@@ -39409,13 +39476,14 @@
                   REACT_APP_END_POINT_POPULATION_PARAMETER1: "prefCode",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2: "cityCode",
                   REACT_APP_END_POINT_POPULATION:
-                    "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+                    "/population/composition/perYear",
                   REACT_APP_PLOT_TITLE: "\u4eba\u53e3\u69cb\u6210",
                   REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE: "13",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE: "-",
                   REACT_APP_PAGE_TITLE: "RESAS API + React + Typescript",
-                  REACT_APP_END_POINT_PREFECTURE:
-                    "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+                  REACT_APP_END_POINT_PREFECTURE: "/prefectures",
+                  REACT_APP_RESAS_BASE_URL:
+                    "https://opendata.resas-portal.go.jp/api/v1",
                   REACT_APP_RESAS_API_KEY:
                     "HtfSe2l3PMSXqKn8b6visxY9iRCkNy4rdjcs6zu7",
                   REACT_APP_CHECKBOX_TITLE: "\u90fd\u9053\u5e9c\u770c",
@@ -39433,13 +39501,14 @@
                   REACT_APP_END_POINT_POPULATION_PARAMETER1: "prefCode",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2: "cityCode",
                   REACT_APP_END_POINT_POPULATION:
-                    "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+                    "/population/composition/perYear",
                   REACT_APP_PLOT_TITLE: "\u4eba\u53e3\u69cb\u6210",
                   REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE: "13",
                   REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE: "-",
                   REACT_APP_PAGE_TITLE: "RESAS API + React + Typescript",
-                  REACT_APP_END_POINT_PREFECTURE:
-                    "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+                  REACT_APP_END_POINT_PREFECTURE: "/prefectures",
+                  REACT_APP_RESAS_BASE_URL:
+                    "https://opendata.resas-portal.go.jp/api/v1",
                   REACT_APP_RESAS_API_KEY:
                     "HtfSe2l3PMSXqKn8b6visxY9iRCkNy4rdjcs6zu7",
                   REACT_APP_CHECKBOX_TITLE: "\u90fd\u9053\u5e9c\u770c",
@@ -39456,19 +39525,20 @@
                 REACT_APP_END_POINT_POPULATION_PARAMETER1: "prefCode",
                 REACT_APP_END_POINT_POPULATION_PARAMETER2: "cityCode",
                 REACT_APP_END_POINT_POPULATION:
-                  "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+                  "/population/composition/perYear",
                 REACT_APP_PLOT_TITLE: "\u4eba\u53e3\u69cb\u6210",
                 REACT_APP_END_POINT_POPULATION_PARAMETER1_VALUE: "13",
                 REACT_APP_END_POINT_POPULATION_PARAMETER2_VALUE: "-",
                 REACT_APP_PAGE_TITLE: "RESAS API + React + Typescript",
-                REACT_APP_END_POINT_PREFECTURE:
-                  "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+                REACT_APP_END_POINT_PREFECTURE: "/prefectures",
+                REACT_APP_RESAS_BASE_URL:
+                  "https://opendata.resas-portal.go.jp/api/v1",
                 REACT_APP_RESAS_API_KEY:
                   "HtfSe2l3PMSXqKn8b6visxY9iRCkNy4rdjcs6zu7",
                 REACT_APP_CHECKBOX_TITLE: "\u90fd\u9053\u5e9c\u770c",
               }.SC_DISABLE_SPEEDY
         );
-      function _(e) {
+      function z(e) {
         for (
           var t = arguments.length, i = new Array(t > 1 ? t - 1 : 0), a = 1;
           a < t;
@@ -39482,7 +39552,7 @@
             (i.length > 0 ? " Args: " + i.join(", ") : "")
         );
       }
-      var R = (function () {
+      var D = (function () {
           function e(e) {
             (this.groupSizes = new Uint32Array(512)),
               (this.length = 512),
@@ -39497,7 +39567,7 @@
             (t.insertRules = function (e, t) {
               if (e >= this.groupSizes.length) {
                 for (var i = this.groupSizes, a = i.length, n = a; e >= n; )
-                  (n <<= 1) < 0 && _(16, "" + e);
+                  (n <<= 1) < 0 && z(16, "" + e);
                 (this.groupSizes = new Uint32Array(n)),
                   this.groupSizes.set(i),
                   (this.length = n);
@@ -39536,30 +39606,30 @@
             e
           );
         })(),
-        I = new Map(),
-        O = new Map(),
-        N = 1,
-        M = function (e) {
-          if (I.has(e)) return I.get(e);
-          for (; O.has(N); ) N++;
-          var t = N++;
-          return I.set(e, t), O.set(t, e), t;
+        F = new Map(),
+        X = new Map(),
+        Y = 1,
+        H = function (e) {
+          if (F.has(e)) return F.get(e);
+          for (; X.has(Y); ) Y++;
+          var t = Y++;
+          return F.set(e, t), X.set(t, e), t;
         },
-        z = function (e) {
-          return O.get(e);
+        B = function (e) {
+          return X.get(e);
         },
-        D = function (e, t) {
-          t >= N && (N = t + 1), I.set(e, t), O.set(t, e);
+        W = function (e, t) {
+          t >= Y && (Y = t + 1), F.set(e, t), X.set(t, e);
         },
-        F = "style[" + E + '][data-styled-version="5.3.3"]',
-        X = new RegExp(
-          "^" + E + '\\.g(\\d+)\\[id="([\\w\\d-]+)"\\].*?"([^"]*)'
+        V = "style[" + O + '][data-styled-version="5.3.3"]',
+        j = new RegExp(
+          "^" + O + '\\.g(\\d+)\\[id="([\\w\\d-]+)"\\].*?"([^"]*)'
         ),
-        Y = function (e, t, i) {
+        U = function (e, t, i) {
           for (var a, n = i.split(","), r = 0, s = n.length; r < s; r++)
             (a = n[r]) && e.registerName(t, a);
         },
-        H = function (e, t) {
+        G = function (e, t) {
           for (
             var i = (t.textContent || "").split("/*!sc*/\n"),
               a = [],
@@ -39570,42 +39640,42 @@
           ) {
             var s = i[n].trim();
             if (s) {
-              var o = s.match(X);
+              var o = s.match(j);
               if (o) {
                 var l = 0 | parseInt(o[1], 10),
                   c = o[2];
                 0 !== l &&
-                  (D(c, l), Y(e, c, o[3]), e.getTag().insertRules(l, a)),
+                  (W(c, l), U(e, c, o[3]), e.getTag().insertRules(l, a)),
                   (a.length = 0);
               } else a.push(s);
             }
           }
         },
-        B = function () {
+        q = function () {
           return "undefined" != typeof window &&
             void 0 !== window.__webpack_nonce__
             ? window.__webpack_nonce__
             : null;
         },
-        W = function (e) {
+        $ = function (e) {
           var t = document.head,
             i = e || t,
             a = document.createElement("style"),
             n = (function (e) {
               for (var t = e.childNodes, i = t.length; i >= 0; i--) {
                 var a = t[i];
-                if (a && 1 === a.nodeType && a.hasAttribute(E)) return a;
+                if (a && 1 === a.nodeType && a.hasAttribute(O)) return a;
               }
             })(i),
             r = void 0 !== n ? n.nextSibling : null;
-          a.setAttribute(E, "active"),
+          a.setAttribute(O, "active"),
             a.setAttribute("data-styled-version", "5.3.3");
-          var s = B();
+          var s = q();
           return s && a.setAttribute("nonce", s), i.insertBefore(a, r), a;
         },
-        V = (function () {
+        Z = (function () {
           function e(e) {
-            var t = (this.element = W(e));
+            var t = (this.element = $(e));
             t.appendChild(document.createTextNode("")),
               (this.sheet = (function (e) {
                 if (e.sheet) return e.sheet;
@@ -39617,7 +39687,7 @@
                   var n = t[i];
                   if (n.ownerNode === e) return n;
                 }
-                _(17);
+                z(17);
               })(t)),
               (this.length = 0);
           }
@@ -39642,9 +39712,9 @@
             e
           );
         })(),
-        j = (function () {
+        K = (function () {
           function e(e) {
-            var t = (this.element = W(e));
+            var t = (this.element = $(e));
             (this.nodes = t.childNodes), (this.length = 0);
           }
           var t = e.prototype;
@@ -39668,7 +39738,7 @@
             e
           );
         })(),
-        U = (function () {
+        Q = (function () {
           function e(e) {
             (this.rules = []), (this.length = 0);
           }
@@ -39689,35 +39759,35 @@
             e
           );
         })(),
-        G = T,
-        q = { isServer: !T, useCSSOMInjection: !L },
-        $ = (function () {
+        J = N,
+        ee = { isServer: !N, useCSSOMInjection: !M },
+        te = (function () {
           function e(e, t, i) {
-            void 0 === e && (e = A),
+            void 0 === e && (e = L),
               void 0 === t && (t = {}),
-              (this.options = v({}, q, {}, e)),
+              (this.options = C({}, ee, {}, e)),
               (this.gs = t),
               (this.names = new Map(i)),
               (this.server = !!e.isServer),
               !this.server &&
-                T &&
-                G &&
-                ((G = !1),
+                N &&
+                J &&
+                ((J = !1),
                 (function (e) {
                   for (
-                    var t = document.querySelectorAll(F), i = 0, a = t.length;
+                    var t = document.querySelectorAll(V), i = 0, a = t.length;
                     i < a;
                     i++
                   ) {
                     var n = t[i];
                     n &&
-                      "active" !== n.getAttribute(E) &&
-                      (H(e, n), n.parentNode && n.parentNode.removeChild(n));
+                      "active" !== n.getAttribute(O) &&
+                      (G(e, n), n.parentNode && n.parentNode.removeChild(n));
                   }
                 })(this));
           }
           e.registerId = function (e) {
-            return M(e);
+            return H(e);
           };
           var t = e.prototype;
           return (
@@ -39725,7 +39795,7 @@
               return (
                 void 0 === i && (i = !0),
                 new e(
-                  v({}, this.options, {}, t),
+                  C({}, this.options, {}, t),
                   this.gs,
                   (i && this.names) || void 0
                 )
@@ -39741,8 +39811,8 @@
                   ((i = (t = this.options).isServer),
                   (a = t.useCSSOMInjection),
                   (n = t.target),
-                  (e = i ? new U(n) : a ? new V(n) : new j(n)),
-                  new R(e)))
+                  (e = i ? new Q(n) : a ? new Z(n) : new K(n)),
+                  new D(e)))
               );
               var e, t, i, a, n;
             }),
@@ -39750,20 +39820,20 @@
               return this.names.has(e) && this.names.get(e).has(t);
             }),
             (t.registerName = function (e, t) {
-              if ((M(e), this.names.has(e))) this.names.get(e).add(t);
+              if ((H(e), this.names.has(e))) this.names.get(e).add(t);
               else {
                 var i = new Set();
                 i.add(t), this.names.set(e, i);
               }
             }),
             (t.insertRules = function (e, t, i) {
-              this.registerName(e, t), this.getTag().insertRules(M(e), i);
+              this.registerName(e, t), this.getTag().insertRules(H(e), i);
             }),
             (t.clearNames = function (e) {
               this.names.has(e) && this.names.get(e).clear();
             }),
             (t.clearRules = function (e) {
-              this.getTag().clearGroup(M(e)), this.clearNames(e);
+              this.getTag().clearGroup(H(e)), this.clearNames(e);
             }),
             (t.clearTag = function () {
               this.tag = void 0;
@@ -39775,12 +39845,12 @@
                   n < i;
                   n++
                 ) {
-                  var r = z(n);
+                  var r = B(n);
                   if (void 0 !== r) {
                     var s = e.names.get(r),
                       o = t.getGroup(n);
                     if (s && o && s.size) {
-                      var l = E + ".g" + n + '[id="' + r + '"]',
+                      var l = O + ".g" + n + '[id="' + r + '"]',
                         c = "";
                       void 0 !== s &&
                         s.forEach(function (e) {
@@ -39796,40 +39866,40 @@
             e
           );
         })(),
-        Z = /(a)(d)/gi,
-        K = function (e) {
+        ie = /(a)(d)/gi,
+        ae = function (e) {
           return String.fromCharCode(e + (e > 25 ? 39 : 97));
         };
-      function Q(e) {
+      function ne(e) {
         var t,
           i = "";
-        for (t = Math.abs(e); t > 52; t = (t / 52) | 0) i = K(t % 52) + i;
-        return (K(t % 52) + i).replace(Z, "$1-$2");
+        for (t = Math.abs(e); t > 52; t = (t / 52) | 0) i = ae(t % 52) + i;
+        return (ae(t % 52) + i).replace(ie, "$1-$2");
       }
-      var J = function (e, t) {
+      var re = function (e, t) {
           for (var i = t.length; i; ) e = (33 * e) ^ t.charCodeAt(--i);
           return e;
         },
-        ee = function (e) {
-          return J(5381, e);
+        se = function (e) {
+          return re(5381, e);
         };
-      function te(e) {
+      function oe(e) {
         for (var t = 0; t < e.length; t += 1) {
           var i = e[t];
-          if (S(i) && !P(i)) return !1;
+          if (_(i) && !I(i)) return !1;
         }
         return !0;
       }
-      var ie = ee("5.3.3"),
-        ae = (function () {
+      var le = se("5.3.3"),
+        ce = (function () {
           function e(e, t, i) {
             (this.rules = e),
               (this.staticRulesId = ""),
-              (this.isStatic = (void 0 === i || i.isStatic) && te(e)),
+              (this.isStatic = (void 0 === i || i.isStatic) && oe(e)),
               (this.componentId = t),
-              (this.baseHash = J(ie, t)),
+              (this.baseHash = re(le, t)),
               (this.baseStyle = i),
-              $.registerId(t);
+              te.registerId(t);
           }
           return (
             (e.prototype.generateAndInjectStyles = function (e, t, i) {
@@ -39843,8 +39913,8 @@
                 if (this.staticRulesId && t.hasNameForId(a, this.staticRulesId))
                   n.push(this.staticRulesId);
                 else {
-                  var r = we(this.rules, e, t, i).join(""),
-                    s = Q(J(this.baseHash, r) >>> 0);
+                  var r = Ee(this.rules, e, t, i).join(""),
+                    s = ne(re(this.baseHash, r) >>> 0);
                   if (!t.hasNameForId(a, s)) {
                     var o = i(r, "." + s, void 0, a);
                     t.insertRules(a, s, o);
@@ -39854,7 +39924,7 @@
               else {
                 for (
                   var l = this.rules.length,
-                    c = J(this.baseHash, i.hash),
+                    c = re(this.baseHash, i.hash),
                     h = "",
                     u = 0;
                   u < l;
@@ -39863,13 +39933,13 @@
                   var d = this.rules[u];
                   if ("string" == typeof d) h += d;
                   else if (d) {
-                    var f = we(d, e, t, i),
+                    var f = Ee(d, e, t, i),
                       p = Array.isArray(f) ? f.join("") : f;
-                    (c = J(c, p + u)), (h += p);
+                    (c = re(c, p + u)), (h += p);
                   }
                 }
                 if (h) {
-                  var g = Q(c >>> 0);
+                  var g = ne(c >>> 0);
                   if (!t.hasNameForId(a, g)) {
                     var x = i(h, "." + g, void 0, a);
                     t.insertRules(a, g, x);
@@ -39882,19 +39952,19 @@
             e
           );
         })(),
-        ne = /^\s*\/\/.*$/gm,
-        re = [":", "[", ".", "#"];
-      function se(e) {
+        he = /^\s*\/\/.*$/gm,
+        ue = [":", "[", ".", "#"];
+      function de(e) {
         var t,
           i,
           a,
           n,
-          r = void 0 === e ? A : e,
+          r = void 0 === e ? L : e,
           s = r.options,
-          o = void 0 === s ? A : s,
+          o = void 0 === s ? L : s,
           l = r.plugins,
-          c = void 0 === l ? k : l,
-          h = new f(o),
+          c = void 0 === l ? T : l,
+          h = new v(o),
           u = [],
           d = (function (e) {
             function t(t) {
@@ -39926,14 +39996,14 @@
           })(function (e) {
             u.push(e);
           }),
-          p = function (e, a, r) {
-            return (0 === a && -1 !== re.indexOf(r[i.length])) || r.match(n)
+          f = function (e, a, r) {
+            return (0 === a && -1 !== ue.indexOf(r[i.length])) || r.match(n)
               ? e
               : "." + t;
           };
-        function g(e, r, s, o) {
+        function p(e, r, s, o) {
           void 0 === o && (o = "&");
-          var l = e.replace(ne, ""),
+          var l = e.replace(he, ""),
             c = r && s ? s + " " + r + " { " + l + " }" : l;
           return (
             (t = o),
@@ -39950,7 +40020,7 @@
                 2 === e &&
                   n.length &&
                   n[0].lastIndexOf(i) > 0 &&
-                  (n[0] = n[0].replace(a, p));
+                  (n[0] = n[0].replace(a, f));
               },
               d,
               function (e) {
@@ -39961,31 +40031,31 @@
               },
             ])
           ),
-          (g.hash = c.length
+          (p.hash = c.length
             ? c
                 .reduce(function (e, t) {
-                  return t.name || _(15), J(e, t.name);
+                  return t.name || z(15), re(e, t.name);
                 }, 5381)
                 .toString()
             : ""),
-          g
+          p
         );
       }
-      var oe = t.createContext(),
-        le = (oe.Consumer, t.createContext()),
-        ce = (le.Consumer, new $()),
-        he = se();
-      function ue() {
-        return (0, t.useContext)(oe) || ce;
+      var fe = t.createContext(),
+        pe = (fe.Consumer, t.createContext()),
+        ge = (pe.Consumer, new te()),
+        xe = de();
+      function me() {
+        return (0, t.useContext)(fe) || ge;
       }
-      function de() {
-        return (0, t.useContext)(le) || he;
+      function be() {
+        return (0, t.useContext)(pe) || xe;
       }
-      function fe(e) {
+      function ve(e) {
         var i = (0, t.useState)(e.stylisPlugins),
           a = i[0],
           n = i[1],
-          r = ue(),
+          r = me(),
           s = (0, t.useMemo)(
             function () {
               var t = r;
@@ -40003,7 +40073,7 @@
           ),
           o = (0, t.useMemo)(
             function () {
-              return se({
+              return de({
                 options: { prefix: !e.disableVendorPrefixes },
                 plugins: a,
               });
@@ -40013,28 +40083,28 @@
         return (
           (0, t.useEffect)(
             function () {
-              d()(a, e.stylisPlugins) || n(e.stylisPlugins);
+              b()(a, e.stylisPlugins) || n(e.stylisPlugins);
             },
             [e.stylisPlugins]
           ),
           t.createElement(
-            oe.Provider,
+            fe.Provider,
             { value: s },
-            t.createElement(le.Provider, { value: o }, e.children)
+            t.createElement(pe.Provider, { value: o }, e.children)
           )
         );
       }
-      var pe = (function () {
+      var ye = (function () {
           function e(e, t) {
             var i = this;
             (this.inject = function (e, t) {
-              void 0 === t && (t = he);
+              void 0 === t && (t = xe);
               var a = i.name + t.hash;
               e.hasNameForId(i.id, a) ||
                 e.insertRules(i.id, a, t(i.rules, a, "@keyframes"));
             }),
               (this.toString = function () {
-                return _(12, String(i.name));
+                return z(12, String(i.name));
               }),
               (this.name = e),
               (this.id = "sc-keyframes-" + e),
@@ -40042,65 +40112,65 @@
           }
           return (
             (e.prototype.getName = function (e) {
-              return void 0 === e && (e = he), this.name + e.hash;
+              return void 0 === e && (e = xe), this.name + e.hash;
             }),
             e
           );
         })(),
-        ge = /([A-Z])/,
-        xe = /([A-Z])/g,
-        me = /^ms-/,
-        be = function (e) {
+        we = /([A-Z])/,
+        ke = /([A-Z])/g,
+        Ae = /^ms-/,
+        Se = function (e) {
           return "-" + e.toLowerCase();
         };
-      function ve(e) {
-        return ge.test(e) ? e.replace(xe, be).replace(me, "-ms-") : e;
+      function Ce(e) {
+        return we.test(e) ? e.replace(ke, Se).replace(Ae, "-ms-") : e;
       }
-      var ye = function (e) {
+      var Pe = function (e) {
         return null == e || !1 === e || "" === e;
       };
-      function we(e, t, i, a) {
+      function Ee(e, t, i, a) {
         if (Array.isArray(e)) {
           for (var n, r = [], s = 0, o = e.length; s < o; s += 1)
-            "" !== (n = we(e[s], t, i, a)) &&
+            "" !== (n = Ee(e[s], t, i, a)) &&
               (Array.isArray(n) ? r.push.apply(r, n) : r.push(n));
           return r;
         }
-        return ye(e)
+        return Pe(e)
           ? ""
-          : P(e)
+          : I(e)
           ? "." + e.styledComponentId
-          : S(e)
+          : _(e)
           ? "function" != typeof (l = e) ||
             (l.prototype && l.prototype.isReactComponent) ||
             !t
             ? e
-            : we(e(t), t, i, a)
-          : e instanceof pe
+            : Ee(e(t), t, i, a)
+          : e instanceof ye
           ? i
             ? (e.inject(i, a), e.getName(a))
             : e
-          : w(e)
+          : E(e)
           ? (function e(t, i) {
               var a,
                 n,
                 r = [];
               for (var s in t)
                 t.hasOwnProperty(s) &&
-                  !ye(t[s]) &&
-                  ((Array.isArray(t[s]) && t[s].isCss) || S(t[s])
-                    ? r.push(ve(s) + ":", t[s], ";")
-                    : w(t[s])
+                  !Pe(t[s]) &&
+                  ((Array.isArray(t[s]) && t[s].isCss) || _(t[s])
+                    ? r.push(Ce(s) + ":", t[s], ";")
+                    : E(t[s])
                     ? r.push.apply(r, e(t[s], s))
                     : r.push(
-                        ve(s) +
+                        Ce(s) +
                           ": " +
                           ((a = s),
                           (null == (n = t[s]) ||
                           "boolean" == typeof n ||
                           "" === n
                             ? ""
-                            : "number" != typeof n || 0 === n || a in p
+                            : "number" != typeof n || 0 === n || a in y
                             ? String(n).trim()
                             : n + "px") + ";")
                       ));
@@ -40109,54 +40179,54 @@
           : e.toString();
         var l;
       }
-      var ke = function (e) {
+      var Te = function (e) {
         return Array.isArray(e) && (e.isCss = !0), e;
       };
-      function Ae(e) {
+      function Le(e) {
         for (
           var t = arguments.length, i = new Array(t > 1 ? t - 1 : 0), a = 1;
           a < t;
           a++
         )
           i[a - 1] = arguments[a];
-        return S(e) || w(e)
-          ? ke(we(y(k, [e].concat(i))))
+        return _(e) || E(e)
+          ? Te(Ee(P(T, [e].concat(i))))
           : 0 === i.length && 1 === e.length && "string" == typeof e[0]
           ? e
-          : ke(we(y(e, i)));
+          : Te(Ee(P(e, i)));
       }
       new Set();
-      var Se = function (e, t, i) {
+      var _e = function (e, t, i) {
           return (
-            void 0 === i && (i = A),
+            void 0 === i && (i = L),
             (e.theme !== i.theme && e.theme) || t || i.theme
           );
         },
-        Ce = /[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~-]+/g,
-        Pe = /(^-|-$)/g;
-      function Ee(e) {
-        return e.replace(Ce, "-").replace(Pe, "");
+        Re = /[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~-]+/g,
+        Ie = /(^-|-$)/g;
+      function Oe(e) {
+        return e.replace(Re, "-").replace(Ie, "");
       }
-      var Te = function (e) {
-        return Q(ee(e) >>> 0);
+      var Ne = function (e) {
+        return ne(se(e) >>> 0);
       };
-      function Le(e) {
+      function Me(e) {
         return "string" == typeof e && !0;
       }
-      var _e = function (e) {
+      var ze = function (e) {
           return (
             "function" == typeof e ||
             ("object" == typeof e && null !== e && !Array.isArray(e))
           );
         },
-        Re = function (e) {
+        De = function (e) {
           return "__proto__" !== e && "constructor" !== e && "prototype" !== e;
         };
-      function Ie(e, t, i) {
+      function Fe(e, t, i) {
         var a = e[i];
-        _e(t) && _e(a) ? Oe(a, t) : (e[i] = t);
+        ze(t) && ze(a) ? Xe(a, t) : (e[i] = t);
       }
-      function Oe(e) {
+      function Xe(e) {
         for (
           var t = arguments.length, i = new Array(t > 1 ? t - 1 : 0), a = 1;
           a < t;
@@ -40165,25 +40235,25 @@
           i[a - 1] = arguments[a];
         for (var n = 0, r = i; n < r.length; n++) {
           var s = r[n];
-          if (_e(s)) for (var o in s) Re(o) && Ie(e, s[o], o);
+          if (ze(s)) for (var o in s) De(o) && Fe(e, s[o], o);
         }
         return e;
       }
-      var Ne = t.createContext();
-      Ne.Consumer;
-      var Me = {};
-      function ze(e, i, a) {
-        var n = P(e),
-          r = !Le(e),
+      var Ye = t.createContext();
+      Ye.Consumer;
+      var He = {};
+      function Be(e, i, a) {
+        var n = I(e),
+          r = !Me(e),
           s = i.attrs,
-          o = void 0 === s ? k : s,
+          o = void 0 === s ? T : s,
           l = i.componentId,
           c =
             void 0 === l
               ? (function (e, t) {
-                  var i = "string" != typeof e ? "sc" : Ee(e);
-                  Me[i] = (Me[i] || 0) + 1;
-                  var a = i + "-" + Te("5.3.3" + i + Me[i]);
+                  var i = "string" != typeof e ? "sc" : Oe(e);
+                  He[i] = (He[i] || 0) + 1;
+                  var a = i + "-" + Ne("5.3.3" + i + He[i]);
                   return t ? t + "-" + a : a;
                 })(i.displayName, i.parentComponentId)
               : l,
@@ -40191,12 +40261,12 @@
           u =
             void 0 === h
               ? (function (e) {
-                  return Le(e) ? "styled." + e : "Styled(" + C(e) + ")";
+                  return Me(e) ? "styled." + e : "Styled(" + R(e) + ")";
                 })(e)
               : h,
           d =
             i.displayName && i.componentId
-              ? Ee(i.displayName) + "-" + i.componentId
+              ? Oe(i.displayName) + "-" + i.componentId
               : i.componentId || c,
           f =
             n && e.attrs
@@ -40213,9 +40283,9 @@
               }
             : e.shouldForwardProp);
         var g,
-          m = new ae(a, d, n ? e.componentStyle : void 0),
-          y = m.isStatic && 0 === o.length,
-          w = function (e, i) {
+          x = new ce(a, d, n ? e.componentStyle : void 0),
+          m = x.isStatic && 0 === o.length,
+          b = function (e, i) {
             return (function (e, i, a, n) {
               var r = e.attrs,
                 s = e.componentStyle,
@@ -40225,8 +40295,8 @@
                 h = e.styledComponentId,
                 u = e.target,
                 d = (function (e, t, i) {
-                  void 0 === e && (e = A);
-                  var a = v({}, t, { theme: e }),
+                  void 0 === e && (e = L);
+                  var a = C({}, t, { theme: e }),
                     n = {};
                   return (
                     i.forEach(function (e) {
@@ -40234,7 +40304,7 @@
                         i,
                         r,
                         s = e;
-                      for (t in (S(s) && (s = s(a)), s))
+                      for (t in (_(s) && (s = s(a)), s))
                         a[t] = n[t] =
                           "className" === t
                             ? ((i = n[t]),
@@ -40244,49 +40314,49 @@
                     }),
                     [a, n]
                   );
-                })(Se(i, (0, t.useContext)(Ne), o) || A, i, r),
+                })(_e(i, (0, t.useContext)(Ye), o) || L, i, r),
                 f = d[0],
                 p = d[1],
                 g = (function (e, t, i, a) {
-                  var n = ue(),
-                    r = de();
+                  var n = me(),
+                    r = be();
                   return t
-                    ? e.generateAndInjectStyles(A, n, r)
+                    ? e.generateAndInjectStyles(L, n, r)
                     : e.generateAndInjectStyles(i, n, r);
                 })(s, n, f),
-                m = a,
-                b = p.$as || i.$as || p.as || i.as || u,
-                y = Le(b),
-                w = p !== i ? v({}, i, {}, p) : i,
-                k = {};
-              for (var C in w)
-                "$" !== C[0] &&
-                  "as" !== C &&
-                  ("forwardedAs" === C
-                    ? (k.as = w[C])
-                    : (c ? c(C, x, b) : !y || x(C)) && (k[C] = w[C]));
+                x = a,
+                m = p.$as || i.$as || p.as || i.as || u,
+                b = Me(m),
+                v = p !== i ? C({}, i, {}, p) : i,
+                y = {};
+              for (var w in v)
+                "$" !== w[0] &&
+                  "as" !== w &&
+                  ("forwardedAs" === w
+                    ? (y.as = v[w])
+                    : (c ? c(w, k, m) : !b || k(w)) && (y[w] = v[w]));
               return (
                 i.style &&
                   p.style !== i.style &&
-                  (k.style = v({}, i.style, {}, p.style)),
-                (k.className = Array.prototype
+                  (y.style = C({}, i.style, {}, p.style)),
+                (y.className = Array.prototype
                   .concat(l, h, g !== h ? g : null, i.className, p.className)
                   .filter(Boolean)
                   .join(" ")),
-                (k.ref = m),
-                (0, t.createElement)(b, k)
+                (y.ref = x),
+                (0, t.createElement)(m, y)
               );
-            })(g, e, i, y);
+            })(g, e, i, m);
           };
         return (
-          (w.displayName = u),
-          ((g = t.forwardRef(w)).attrs = f),
-          (g.componentStyle = m),
+          (b.displayName = u),
+          ((g = t.forwardRef(b)).attrs = f),
+          (g.componentStyle = x),
           (g.displayName = u),
           (g.shouldForwardProp = p),
           (g.foldedComponentIds = n
             ? Array.prototype.concat(e.foldedComponentIds, e.styledComponentId)
-            : k),
+            : T),
           (g.styledComponentId = d),
           (g.target = n ? e.target : e),
           (g.withComponent = function (e) {
@@ -40301,22 +40371,22 @@
                   (i = r[a]), t.indexOf(i) >= 0 || (n[i] = e[i]);
                 return n;
               })(i, ["componentId"]),
-              r = t && t + "-" + (Le(e) ? e : Ee(C(e)));
-            return ze(e, v({}, n, { attrs: f, componentId: r }), a);
+              r = t && t + "-" + (Me(e) ? e : Oe(R(e)));
+            return Be(e, C({}, n, { attrs: f, componentId: r }), a);
           }),
           Object.defineProperty(g, "defaultProps", {
             get: function () {
               return this._foldedDefaultProps;
             },
             set: function (t) {
-              this._foldedDefaultProps = n ? Oe({}, e.defaultProps, t) : t;
+              this._foldedDefaultProps = n ? Xe({}, e.defaultProps, t) : t;
             },
           }),
           (g.toString = function () {
             return "." + g.styledComponentId;
           }),
           r &&
-            b()(g, e, {
+            S()(g, e, {
               attrs: !0,
               componentStyle: !0,
               displayName: !0,
@@ -40329,29 +40399,29 @@
           g
         );
       }
-      var De = function (e) {
+      var We = function (e) {
         return (function e(t, i, a) {
-          if ((void 0 === a && (a = A), !(0, h.isValidElementType)(i)))
-            return _(1, String(i));
+          if ((void 0 === a && (a = L), !(0, x.isValidElementType)(i)))
+            return z(1, String(i));
           var n = function () {
-            return t(i, a, Ae.apply(void 0, arguments));
+            return t(i, a, Le.apply(void 0, arguments));
           };
           return (
             (n.withConfig = function (n) {
-              return e(t, i, v({}, a, {}, n));
+              return e(t, i, C({}, a, {}, n));
             }),
             (n.attrs = function (n) {
               return e(
                 t,
                 i,
-                v({}, a, {
+                C({}, a, {
                   attrs: Array.prototype.concat(a.attrs, n).filter(Boolean),
                 })
               );
             }),
             n
           );
-        })(ze, e);
+        })(Be, e);
       };
       [
         "a",
@@ -40491,18 +40561,18 @@
         "textPath",
         "tspan",
       ].forEach(function (e) {
-        De[e] = De(e);
+        We[e] = We(e);
       });
       !(function () {
         function e(e, t) {
           (this.rules = e),
             (this.componentId = t),
-            (this.isStatic = te(e)),
-            $.registerId(this.componentId + 1);
+            (this.isStatic = oe(e)),
+            te.registerId(this.componentId + 1);
         }
         var t = e.prototype;
         (t.createStyles = function (e, t, i, a) {
-          var n = a(we(this.rules, t, i, a).join(""), ""),
+          var n = a(Ee(this.rules, t, i, a).join(""), ""),
             r = this.componentId + e;
           i.insertRules(r, r, n);
         }),
@@ -40510,7 +40580,7 @@
             t.clearRules(this.componentId + e);
           }),
           (t.renderStyles = function (e, t, i, a) {
-            e > 2 && $.registerId(this.componentId + e),
+            e > 2 && te.registerId(this.componentId + e),
               this.removeStyles(e, i),
               this.createStyles(e, t, i, a);
           });
@@ -40521,12 +40591,12 @@
           (this._emitSheetCSS = function () {
             var t = e.instance.toString();
             if (!t) return "";
-            var i = B();
+            var i = q();
             return (
               "<style " +
               [
                 i && 'nonce="' + i + '"',
-                E + '="true"',
+                O + '="true"',
                 'data-styled-version="5.3.3"',
               ]
                 .filter(Boolean)
@@ -40537,167 +40607,150 @@
             );
           }),
             (this.getStyleTags = function () {
-              return e.sealed ? _(2) : e._emitSheetCSS();
+              return e.sealed ? z(2) : e._emitSheetCSS();
             }),
             (this.getStyleElement = function () {
               var i;
-              if (e.sealed) return _(2);
+              if (e.sealed) return z(2);
               var a =
-                  (((i = {})[E] = ""),
+                  (((i = {})[O] = ""),
                   (i["data-styled-version"] = "5.3.3"),
                   (i.dangerouslySetInnerHTML = {
                     __html: e.instance.toString(),
                   }),
                   i),
-                n = B();
+                n = q();
               return (
                 n && (a.nonce = n),
-                [t.createElement("style", v({}, a, { key: "sc-0-0" }))]
+                [t.createElement("style", C({}, a, { key: "sc-0-0" }))]
               );
             }),
             (this.seal = function () {
               e.sealed = !0;
             }),
-            (this.instance = new $({ isServer: !0 })),
+            (this.instance = new te({ isServer: !0 })),
             (this.sealed = !1);
         }
         var i = e.prototype;
         (i.collectStyles = function (e) {
           return this.sealed
-            ? _(2)
-            : t.createElement(fe, { sheet: this.instance }, e);
+            ? z(2)
+            : t.createElement(ve, { sheet: this.instance }, e);
         }),
           (i.interleaveWithNodeStream = function (e) {
-            return _(3);
+            return z(3);
           });
       })();
-      var Fe,
-        Xe,
-        Ye,
-        He,
-        Be = De,
-        We = Be.div(
-          Fe || (Fe = e(["\n  margin: 5px;\n  display: inline-block;\n"]))
+      var Ve,
+        je,
+        Ue,
+        Ge,
+        qe = We,
+        $e = qe.div(
+          Ve || (Ve = e(["\n  margin: 5px;\n  display: inline-block;\n"]))
         ),
-        Ve =
-          (Be.div(
-            Xe ||
-              (Xe = e(["\n  background-color: rgba(130, 130, 180, 0.01);\n"]))
+        Ze =
+          (qe.div(
+            je ||
+              (je = e(["\n  background-color: rgba(130, 130, 180, 0.01);\n"]))
           ),
-          Be.h1(
-            Ye ||
-              (Ye = e([
+          qe.h1(
+            Ue ||
+              (Ue = e([
                 "\n  text-align: center;\n  color: rgba(70, 70, 90, 0.999);\n  background-color: rgba(130, 130, 180, 0.08);\n  width: 100%;\n",
               ]))
           )),
-        je = Be.h2(He || (He = e(["\n  color: rgba(70, 70, 90, 0.999);\n"]))),
-        Ue = {
+        Ke = qe.h2(Ge || (Ge = e(["\n  color: rgba(70, 70, 90, 0.999);\n"]))),
+        Qe = {
           chart: { id: "population-line" },
           legend: {
             position: "right",
             inverseOrder: !1,
             showForSingleSeries: !1,
           },
-          yaxis: { title: { text: c.plotLabelY } },
-          xaxis: { title: { text: c.plotLabelX } },
+          yaxis: { title: { text: o.plotLabelY } },
+          xaxis: { title: { text: o.plotLabelX } },
         },
-        Ge = i(6417);
-      var qe,
-        $e,
-        Ze = function () {
+        Je = i(6417);
+      var et,
+        tt,
+        it = function () {
           var e = r((0, t.useState)([]), 2),
             i = e[0],
-            a = e[1],
-            n = r((0, t.useState)([]), 2),
-            o = n[0],
-            h = n[1];
+            a = e[1];
           (0, t.useEffect)(function () {
-            l().defaults.headers.get["X-API-KEY"] = c.apiKey;
-            var e = c.endPointPrefecture;
-            console.log("fetch:" + e),
-              l()
-                .get(e)
-                .then(function (e) {
-                  var t = (function (e) {
-                    for (var t = [], i = 0; i < e.length; i++) {
-                      var a = {
-                        show: !1,
-                        name: e[i].prefName,
-                        code: e[i].prefCode,
-                        data: [],
-                      };
-                      t.push(a);
-                    }
-                    return t;
-                  })(e.data.result);
-                  a(t), h(Array(t.length).fill(!0));
-                })
-                .catch(function (e) {
-                  console.error("Could not GET Prefecture data"),
-                    console.error(e.response.status),
-                    console.error(e.message);
-                });
+            g.pref
+              .getPrefecture()
+              .then(function (e) {
+                var t = (function (e) {
+                  for (var t = [], i = 0; i < e.length; i++) {
+                    var a = {
+                      show: !1,
+                      isntLoad: !0,
+                      name: e[i].prefName,
+                      code: e[i].prefCode,
+                      data: [],
+                    };
+                    t.push(a);
+                  }
+                  return t;
+                })(e.data.result);
+                a(t);
+              })
+              .catch(function (e) {
+                console.error("Could not GET Prefecture data"),
+                  console.error(e.response.status),
+                  console.error(e.message);
+              });
           }, []);
-          for (var u = i, d = i.slice(), f = [], p = 0; p < d.length; p++)
-            d[p].show && f.push(d[p]);
-          var g = function (e) {
-            return (0, Ge.jsxs)(
-              We,
+          for (var n = i.slice(), l = [], c = 0; c < n.length; c++)
+            n[c].show && l.push(n[c]);
+          var h = function (e) {
+            return (0, Je.jsxs)(
+              $e,
               {
                 children: [
-                  (0, Ge.jsx)("input", {
+                  (0, Je.jsx)("input", {
                     type: "checkbox",
                     checked: e.show,
                     onChange: function () {
                       return (function (e) {
-                        if (o[e - 1]) {
-                          l().defaults.headers.get["X-API-KEY"] = c.apiKey;
-                          var t =
-                            c.endPointPopulation +
-                            "?" +
-                            c.endPointPopulationParameter1 +
-                            "=" +
-                            e +
-                            "&" +
-                            c.endPointPopulationParameter2 +
-                            "=" +
-                            c.endPointPopulationParameter2Value;
-                          console.log("fetch:" + t),
-                            l()
-                              .get(t)
-                              .then(function (t) {
-                                var n = t.data.result,
-                                  r = i.slice(),
-                                  s = (function (e) {
-                                    for (
-                                      var t = [], i = 0;
-                                      i < e.data[0].data.length;
-                                      i++
-                                    )
-                                      if (
-                                        e.data[0].data[i].year <= e.boundaryYear
-                                      ) {
-                                        var a = {
-                                          x: e.data[0].data[i].year,
-                                          y: e.data[0].data[i].value,
-                                        };
-                                        t.push(a);
-                                      }
-                                    return t;
-                                  })(n);
-                                (r[e - 1].data = s),
-                                  (r[e - 1].show = !r[e - 1].show),
-                                  (o[e - 1] = !1),
-                                  a(r);
-                              })
-                              .catch(function (e) {
-                                console.error("Could not GET Population data"),
-                                  console.error(e.response.status),
-                                  console.error(e.message);
-                              });
-                        } else {
-                          var n = i.slice();
-                          (n[e - 1].show = !n[e - 1].show), a(n);
+                        if (i[e - 1].isntLoad)
+                          g.popu
+                            .getPopulation(e)
+                            .then(function (t) {
+                              var n = t.data.result,
+                                r = i.slice(),
+                                s = (function (e) {
+                                  for (
+                                    var t = [], i = 0;
+                                    i < e.data[0].data.length;
+                                    i++
+                                  )
+                                    if (
+                                      e.data[0].data[i].year <= e.boundaryYear
+                                    ) {
+                                      var a = {
+                                        x: e.data[0].data[i].year,
+                                        y: e.data[0].data[i].value,
+                                      };
+                                      t.push(a);
+                                    }
+                                  return t;
+                                })(n);
+                              (r[e - 1].data = s),
+                                (r[e - 1].show = !r[e - 1].show),
+                                (r[e - 1].isntLoad = !1),
+                                a(r);
+                            })
+                            .catch(function (e) {
+                              console.error("Could not GET Population data"),
+                                console.error(e.response.status),
+                                console.error(e.message);
+                            });
+                        else {
+                          var t = i.slice();
+                          (t[e - 1].show = !t[e - 1].show), a(t);
                         }
                       })(e.code);
                     },
@@ -40708,17 +40761,17 @@
               e.code
             );
           };
-          return (0, Ge.jsxs)("div", {
+          return (0, Je.jsxs)("div", {
             children: [
-              (0, Ge.jsx)(Ve, { children: c.pageTitle }),
-              (0, Ge.jsx)(je, { children: c.checkBoxTitle }),
-              Object.keys(u).map(function (e) {
-                return g(u[Number(e)]);
+              (0, Je.jsx)(Ze, { children: o.pageTitle }),
+              (0, Je.jsx)(Ke, { children: o.checkBoxTitle }),
+              Object.keys(i).map(function (e) {
+                return h(i[Number(e)]);
               }),
-              (0, Ge.jsx)(je, { children: c.plotTitle }),
-              (0, Ge.jsx)(s.Z, {
-                options: Ue,
-                series: f,
+              (0, Je.jsx)(Ke, { children: o.plotTitle }),
+              (0, Je.jsx)(s.Z, {
+                options: Qe,
+                series: l,
                 type: "line",
                 width: "100%",
                 height: "100%",
@@ -40726,7 +40779,7 @@
             ],
           });
         },
-        Ke = function (e) {
+        at = function (e) {
           e &&
             e instanceof Function &&
             i
@@ -40741,24 +40794,24 @@
                 i(e), a(e), n(e), r(e), s(e);
               });
         },
-        Qe = Be.div(
-          qe ||
-            (qe = e([
+        nt = qe.div(
+          et ||
+            (et = e([
               '\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",\n    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",\n    sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: rgba(100, 100, 130, 0.999);\n  background-color: rgba(120, 120, 160, 0.01);\n',
             ]))
         );
-      Be.code(
-        $e ||
-          ($e = e([
+      qe.code(
+        tt ||
+          (tt = e([
             '\n  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",\n    monospace;\n',
           ]))
       );
       a.render(
-        (0, Ge.jsx)(t.StrictMode, {
-          children: (0, Ge.jsx)(Qe, { children: (0, Ge.jsx)(Ze, {}) }),
+        (0, Je.jsx)(t.StrictMode, {
+          children: (0, Je.jsx)(nt, { children: (0, Je.jsx)(it, {}) }),
         }),
         document.getElementById("root")
       ),
-        Ke();
+        at();
     })();
 })();

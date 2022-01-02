@@ -1,6 +1,7 @@
 type _Config = {
   apiKey: string;
   nodeEnv: string;
+  baseUrl: string;
   endPointPrefecture: string;
   endPointPopulation: string;
   endPointPopulationParameter1: string;
@@ -17,12 +18,14 @@ type _Config = {
 const Config: _Config = {
   nodeEnv: process.env.NODE_ENV || "NotDefined",
   apiKey: process.env.REACT_APP_RESAS_API_KEY || "NotDefined",
+  baseUrl:
+    process.env.REACT_APP_RESAS_BASE_URL ||
+    "https://opendata.resas-portal.go.jp/api/v1",
   endPointPrefecture:
-    process.env.REACT_APP_END_POINT_PREFECTURE ||
-    "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+    process.env.REACT_APP_END_POINT_PREFECTURE || "/prefectures",
   endPointPopulation:
     process.env.REACT_APP_END_POINT_POPULATION ||
-    "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear",
+    "/population/composition/perYear",
   endPointPopulationParameter1:
     process.env.REACT_APP_END_POINT_POPULATION_PARAMETER1 || "prefCode",
   endPointPopulationParameter2:
