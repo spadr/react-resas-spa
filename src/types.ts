@@ -10,13 +10,33 @@ interface _Prefecture {
 
 interface _Population {
   boundaryYear: number;
-  data: {
-    data: {
-      value: number;
-      year: number;
-    }[];
-    label: string;
-  }[];
+  data: (
+    | {
+        label: string;
+        data: {
+          year: number;
+          value: number;
+        }[];
+      }
+    | {
+        label: string;
+        data: {
+          year: number;
+          value: number;
+          rate: number;
+        }[];
+      }
+  )[];
+}
+
+interface _FetchPrefecture {
+  message: string | null;
+  result: _Prefecture[];
+}
+
+interface _FetchPopulation {
+  message: string | null;
+  result: _Population;
 }
 
 interface _Series {
@@ -46,4 +66,12 @@ interface _Options {
   };
 }
 
-export type { _seriesXY, _Series, _Population, _Prefecture, _Options };
+export type {
+  _seriesXY,
+  _Series,
+  _Population,
+  _FetchPopulation,
+  _Prefecture,
+  _FetchPrefecture,
+  _Options,
+};
